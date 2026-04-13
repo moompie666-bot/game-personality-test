@@ -910,6 +910,144 @@
             display: inline-block;
         }
 
+        .game-meta {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .game-score {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #10B981;
+            border-radius: 20px;
+        }
+
+        .game-platform {
+            font-size: 10px;
+            padding: 2px 7px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            color: var(--text-3);
+            border-radius: 20px;
+        }
+
+        /* ===== 首页入场动画 ===== */
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroScaleIn {
+            from { opacity: 0; transform: scale(0.7); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes heroSlideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes tagStagger {
+            from { opacity: 0; transform: translateY(16px) scale(0.9); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes artMottoReveal {
+            0%   { opacity: 0; letter-spacing: 0.5em; filter: blur(8px); }
+            60%  { opacity: 0.8; letter-spacing: 0.12em; filter: blur(2px); }
+            100% { opacity: 1; letter-spacing: 0.08em; filter: blur(0); }
+        }
+
+        @keyframes artMottoUnderline {
+            from { width: 0; }
+            to   { width: 100%; }
+        }
+
+        .welcome-page .logo-container {
+            animation: heroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: 0.1s;
+        }
+
+        .welcome-page .logo-icon {
+            animation: heroScaleIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        .welcome-page .main-title {
+            animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: 0.35s;
+        }
+
+        .welcome-page .subtitle {
+            animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: 0.5s;
+        }
+
+        .welcome-page .tags .tag:nth-child(1) { animation: tagStagger 0.5s ease both; animation-delay: 0.65s; }
+        .welcome-page .tags .tag:nth-child(2) { animation: tagStagger 0.5s ease both; animation-delay: 0.75s; }
+        .welcome-page .tags .tag:nth-child(3) { animation: tagStagger 0.5s ease both; animation-delay: 0.85s; }
+        .welcome-page .tags .tag:nth-child(4) { animation: tagStagger 0.5s ease both; animation-delay: 0.95s; }
+
+        .welcome-page .start-btn {
+            animation: heroScaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            animation-delay: 1.1s;
+        }
+
+        .welcome-page .decorative-divider,
+        .welcome-page .welcome-tip {
+            animation: heroFadeUp 0.6s ease both;
+            animation-delay: 1.25s;
+        }
+
+        /* 第九艺术标语 */
+        .art-motto {
+            margin-top: 32px;
+            margin-bottom: 4px;
+            text-align: center;
+            animation: artMottoReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+            animation-delay: 1.4s;
+        }
+
+        .art-motto-text {
+            display: inline-block;
+            font-size: clamp(13px, 3vw, 16px);
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: transparent;
+            background: linear-gradient(90deg, #8B5CF6, #06B6D4, #EC4899, #8B5CF6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: artMottoReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) both,
+                       gradientShift 4s linear infinite;
+            animation-delay: 1.4s, 2.8s;
+            position: relative;
+        }
+
+        .art-motto-text::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, #8B5CF6, #EC4899, #06B6D4);
+            border-radius: 2px;
+            animation: artMottoUnderline 1s ease both;
+            animation-delay: 2.4s;
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
         .share-section {
             margin-bottom: 40px;
             display: flex;
@@ -1305,6 +1443,10 @@
             </div>
             
             <p class="welcome-tip">⏱️ 预计完成时间：<span>3-5分钟</span></p>
+
+            <div class="art-motto">
+                <span class="art-motto-text">游戏，第九艺术</span>
+            </div>
         </div>
 
         <!-- 测试页 -->
@@ -1689,7 +1831,7 @@
                 quote: "这操作，只要练三年就能打出来。",
                 desc: "别人搓招搓半天，你一个键就放出去了。BOSS三管血你三秒打完，队友直呼挂逼。你嘴上说\"没没没\"，心里想的是\"就这？\"。去当电竞选手吧，反正上班也是敲键盘。",
                 dimensions: { dedication: "硬核投入", social: "独行猎手", competitive: "分奴本奴", exploration: "效率优先", action: "操作天花板" },
-                games: ["艾尔登法环", "黑暗之魂系列", "街霸VI", "CS2", "APEX英雄"]
+                games: ["艾尔登法环", "只狼", "街霸VI", "CS2", "瓦罗兰特", "茶杯头", "APEX英雄", "空洞骑士"]
             },
             "STRATEGIST": {
                 type: "MASTER",
@@ -1697,7 +1839,7 @@
                 quote: "这局我在第五层，对手在第一层。",
                 desc: "开局你就知道这局稳了。对面蹲草丛？早看穿了。队友问你怎么知道的，你说\"意识\"。其实就是脑子好使，下棋的心算水平拿来打游戏，纯纯降维打击。",
                 dimensions: { dedication: "运筹帷幄", social: "精英社交", competitive: "胜券在握", exploration: "深度研究", action: "策略流" },
-                games: ["云顶之弈", "三国志战略版", "英雄连", "博德之门3", "文明VI"]
+                games: ["云顶之弈", "三国志战略版", "英雄连3", "博德之门3", "文明VI", "火焰纹章：风花雪月", "明日方舟", "杀戮尖塔"]
             },
             "SOCIAL_BUTTERFLY": {
                 type: "SQUAD-LEADER",
@@ -1705,7 +1847,7 @@
                 quote: "人不在一起，灵魂怎么在一起？",
                 desc: "单排？不可能，绝对不可能。一个人打游戏等于坐牢。你是群里的粘合剂，负责叫人、组局、活跃气氛。没有你的群早就凉了。你的游戏技术可能一般，但朋友绝对最多。",
                 dimensions: { dedication: "随叫随到", social: "社交达人", competitive: "娱乐第一", exploration: "体验分享", action: "组队型选手" },
-                games: ["蛋仔派对", "王者荣耀", "我的世界", "动物森友会", "胡闹厨房"]
+                games: ["蛋仔派对", "王者荣耀", "我的世界", "动物森友会", "胡闹厨房2", "人类一败涂地", "荒野乱斗", "蔚蓝"]
             },
             "COLLECTOR": {
                 type: "COMPLETIONIST",
@@ -1713,7 +1855,7 @@
                 quote: "差一点就全图鉴了...再抽十连！",
                 desc: "别人笑你太疯癫，你笑别人看不穿。肝了三天三夜就为一个绝版道具，值吗？你说值。成就100%那一刻的快感，上班发工资都比不了。你不是在玩游戏，你是在完成一项伟大事业。",
                 dimensions: { dedication: "肝帝在线", social: "安静收集", competitive: "自娱自乐", exploration: "收集强迫症", action: "完美主义" },
-                games: ["原神", "明日方舟", "阴阳师", "闪耀暖暖", "宝可梦"]
+                games: ["原神", "明日方舟", "阴阳师", "闪耀暖暖", "宝可梦朱紫", "动物森友会", "以撒的结合：胎衣+", "崩坏星穹铁道"]
             },
             "CHILL_GAMER": {
                 type: "ZEN-MASTER",
@@ -1721,7 +1863,7 @@
                 quote: "输赢乃兵家常事，大侠请重新来过。",
                 desc: "队友挂机了，你帮他打。输了一整晚，你还在笑。有人骂你菜，你直接屏蔽然后继续钓鱼。你不是不认真，你只是觉得认真的人有点好笑。游戏嘛，较真就输了。",
                 dimensions: { dedication: "佛系本佛", social: "安静美男子", competitive: "无欲无求", exploration: "随缘探索", action: "养老专家" },
-                games: ["动物森友会", "星露谷物语", "我的世界", "集合啦！动物森友会", "星露谷"]
+                games: ["动物森友会", "星露谷物语", "我的世界", "蔚蓝", "死亡搁浅", "人类一败涂地", "控制", "以撒的结合：胎衣+"]
             },
             "TOXIC_GAMER": {
                 type: "KEYBOARD-WARRIOR",
@@ -1729,7 +1871,7 @@
                 quote: "干的漂亮！...我是说，对面的。",
                 desc: "打字速度130，队友菜了你比他还急。\"干得漂亮\"发出去的时候你就知道，这把又要打字解释为什么不是嘲讽了。你不是心态差，你只是太想赢了，真的。虽然赢了之后你会发现队友都被你骂跑了。",
                 dimensions: { dedication: "通宵冠军", social: "嘴强王者", competitive: "分奴无疑", exploration: "只看攻略", action: "情绪输出机" },
-                games: ["英雄联盟", "王者荣耀", "绝地求生", "CS2", "守望先锋"]
+                games: ["英雄联盟", "王者荣耀", "绝地求生", "CS2", "瓦罗兰特", "APEX英雄", "Dota2", "云顶之弈"]
             },
             "NIGHT_OWL": {
                 type: "NIGHT-WOLF",
@@ -1737,7 +1879,7 @@
                 quote: "凌晨三点，正是游戏的好时候。",
                 desc: "白天你不是不想玩，是网不好、人太多、键盘不跟手。只有凌晨三点，队友睡了，对手也睡了，你才真正进入状态。恭喜你发现了游戏的正确打开方式。白天用来生存，凌晨用来生活。",
                 dimensions: { dedication: "夜猫子本猫", social: "独狼夜行", competitive: "暗中博弈", exploration: "深夜探索", action: "神秘刺客" },
-                games: ["CS2", "绝地求生", "英雄联盟", "Dota2", "瓦罗兰特"]
+                games: ["CS2", "绝地求生", "英雄联盟", "Dota2", "瓦罗兰特", "哈迪斯", "死亡细胞", "杀戮尖塔"]
             },
             "CASUAL_CUTE": {
                 type: "CUTE-ADDICT",
@@ -1745,7 +1887,7 @@
                 quote: "这个皮肤太可爱了吧！钱包你怎么了？",
                 desc: "强度是什么？能吃吗？你只知道这个皮肤的小裙子好好看。别人抽卡看技能，你抽卡看立绘。648氪出去的那一刻你告诉自己这是最后一次，然后下个新池子又出现了。你是游戏公司最喜欢的玩家类型。",
                 dimensions: { dedication: "随性所欲", social: "萌友遍天下", competitive: "随缘就好", exploration: "颜值即正义", action: "萌系休闲" },
-                games: ["原神", "蛋仔派对", "闪耀暖暖", "未定事件簿", "恋与深空"]
+                games: ["原神", "蛋仔派对", "闪耀暖暖", "未定事件簿", "恋与深空", "公主连结", "阴阳师", "宝可梦朱紫"]
             },
             "HARDCORE": {
                 type: "SOULSLIKE",
@@ -1753,7 +1895,7 @@
                 quote: "死了？正常，这游戏第一次过不算通关。",
                 desc: "简单模式？不存在。困难模式？热身而已。你享受卡关两小时通关十秒的快感，那一刻的成就感比中彩票还爽。别人骂策划的时候你在研究机制，别人退游的时候你在二周目。",
                 dimensions: { dedication: "硬核投入", social: "孤独战士", competitive: "超越自我", exploration: "研究机制", action: "抖M体质" },
-                games: ["艾尔登法环", "黑暗之魂系列", "只狼", "茶杯头", "霍格沃茨之遗"]
+                games: ["艾尔登法环", "黑暗之魂3", "只狼", "茶杯头", "空洞骑士", "蔚蓝", "哈迪斯", "卧龙：苍天陨落"]
             },
             "GUILD_LEADER": {
                 type: "GUILD-LEADER",
@@ -1761,7 +1903,7 @@
                 quote: "跟着我冲，赢了算你们的，输了算我的。",
                 desc: "你可能不是公会里最厉害的，但绝对是最能说的那个。开会你主持，打本你指挥，群里冷场你救场。你把公会当成另一个家，虽然这个家有时候会让你血压升高。但看到会员喊\"会长威武\"，一切都值了。",
                 dimensions: { dedication: "全勤标兵", social: "一呼百应", competitive: "团队荣耀", exploration: "统筹规划", action: "社交指挥官" },
-                games: ["魔兽世界", "最终幻想XIV", "王者荣耀", "部落冲突", "命运方舟"]
+                games: ["魔兽世界", "最终幻想XIV", "王者荣耀", "部落冲突", "命运方舟", "原神", "三国志战略版", "皇室战争"]
             },
             "MOBILE_MASTER": {
                 type: "HANDHELD-KING",
@@ -1769,7 +1911,7 @@
                 quote: "谁说手机不能打职业？我就是行走的传说。",
                 desc: "什么？要用电脑打游戏？那多麻烦。手机掏出来就能玩，蹲厕所、挤地铁、午休时...这些都是你的游戏时间。你是手游王者，段位可能比很多PC玩家都高。便携即正义，你就是行走的电竞馆。",
                 dimensions: { dedication: "碎片大师", social: "随时组队", competitive: "轻度竞技", exploration: "快速体验", action: "手机宗师" },
-                games: ["荒野乱斗", "王者荣耀", "蛋仔派对", "部落冲突", "皇室战争"]
+                games: ["荒野乱斗", "王者荣耀", "蛋仔派对", "部落冲突", "皇室战争", "原神", "明日方舟", "崩坏星穹铁道"]
             },
             "STORY_LOVER": {
                 type: "NARRATIVE-FAN",
@@ -1777,7 +1919,7 @@
                 quote: "等等，这段对话我要听完再打怪。",
                 desc: "战斗？等下再说。这个NPC的故事我还没听完。别人速通花了两小时，你第一章剧情看了五小时。不是你慢，是你真的在体验游戏。隔壁老王问你游戏通关了吗，你说\"我在第48章\"。",
                 dimensions: { dedication: "沉浸体验", social: "安静欣赏", competitive: "无视胜负", exploration: "叙事鉴赏家", action: "剧情优先" },
-                games: ["巫师3", "最终幻想系列", "女神异闻录5", "原神", "崩坏星穹铁道", "勇者斗恶龙"]
+                games: ["巫师3", "极乐迪斯科", "女神异闻录5皇家版", "博德之门3", "最终幻想XVI", "最终幻想VII重制版", "崩坏星穹铁道", "勇者斗恶龙XI"]
             },
             "OPEN_WORLD": {
                 type: "ADVENTURER",
@@ -1785,7 +1927,7 @@
                 quote: "主线？先不急，我要去爬一下那座山。",
                 desc: "别人说你迷路，你说你叫探索。开局给你一张大地图，你能在新手村玩到账号被找回。什么主线任务？不存在的。你的人生哲学是：风景都在路上，重点不是终点，是沿途的每一块可以爬的石头。",
                 dimensions: { dedication: "自由散漫", social: "独行侠", competitive: "不争输赢", exploration: "探索至上", action: "风景党" },
-                games: ["塞尔达传说", "原神", "博德之门3", "霍格沃茨之遗", "星球工匠"]
+                games: ["塞尔达传说：王国之泪", "艾尔登法环", "巫师3", "霍格沃茨之遗", "博德之门3", "地平线西之绝境", "对马岛之魂", "原神"]
             },
             "GACHA_MASTER": {
                 type: "GACHA-ADDICT",
@@ -1793,59 +1935,81 @@
                 quote: "十连又歪了...下一发一定出货！",
                 desc: "数学期望？不存在。你只知道下一发就是拐点。别人648能买件衣服，你648扔进去听个响。但万一呢？万一就出货了呢？这份希望，值得你氪穿整个池子。",
                 dimensions: { dedication: "爆肝抽卡", social: "晒卡专员", competitive: "强度随缘", exploration: "玄学信仰", action: "赌徒心理" },
-                games: ["原神", "崩坏星穹铁道", "阴阳师", "明日方舟", "公主连结"]
+                games: ["原神", "崩坏星穹铁道", "阴阳师", "明日方舟", "公主连结", "恋与深空", "闪耀暖暖", "未定事件簿"]
             }
         };
 
         // ==================== 游戏推荐池 ====================
         const allGames = {
-            // 手游
-            "荒野乱斗": { tag: "快节奏竞技" },
-            "皇室战争": { tag: "全世界最好玩的游戏" },
-            "部落冲突": { tag: "策略养成" },
-            "王者荣耀": { tag: "MOBA竞技" },
-            "蛋仔派对": { tag: "休闲派对" },
-            // PC/主机游戏
-            "艾尔登法环": { tag: "硬核动作" },
-            "黑暗之魂系列": { tag: "受苦神作" },
-            "只狼": { tag: "剑斗美学" },
-            "塞尔达传说": { tag: "开放世界神作" },
-            "巫师3": { tag: "剧情巅峰" },
-            "博德之门3": { tag: "TRPG之王" },
-            "最终幻想系列": { tag: "日式RPG" },
-            "女神异闻录5": { tag: "Jrpg神作" },
-            "云顶之弈": { tag: "自走棋" },
-            "英雄联盟": { tag: "MOBA" },
-            "CS2": { tag: "射击竞技" },
-            "绝地求生": { tag: "战术竞技" },
-            "守望先锋": { tag: "MOBA射击" },
-            "瓦罗兰特": { tag: "战术射击" },
-            "Dota2": { tag: "MOBA" },
-            "我的世界": { tag: "沙盒创造" },
-            "茶杯头": { tag: "硬核跑酷" },
-            "动物森友会": { tag: "休闲社交" },
-            "星露谷物语": { tag: "农场养老" },
-            "霍格沃茨之遗": { tag: "魔法世界" },
-            "宝可梦": { tag: "收集养成" },
-            "勇者斗恶龙": { tag: "经典JRPG" },
-            "原神": { tag: "开放世界" },
-            "崩坏星穹铁道": { tag: "回合RPG" },
-            "明日方舟": { tag: "策略塔防" },
-            "阴阳师": { tag: "回合制" },
-            "闪耀暖暖": { tag: "换装收集" },
-            "未定事件簿": { tag: "推理恋爱" },
-            "恋与深空": { tag: "3D恋爱" },
-            "公主连结": { tag: "番剧游戏" },
-            "三国志战略版": { tag: "SLG策略" },
-            "英雄连": { tag: "RTS即时战略" },
-            "文明VI": { tag: "策略回合" },
-            "命运方舟": { tag: "MMORPG" },
-            "魔兽世界": { tag: "MMORPG" },
-            "最终幻想XIV": { tag: "MMORPG" },
-            "胡闹厨房": { tag: "友尽聚会" },
-            "星球工匠": { tag: "星球探索" },
-            "APEX英雄": { tag: "战术竞技" },
-            "街霸VI": { tag: "格斗游戏" }
+            // ===== 手游 =====
+            "皇室战争": { tag: "全世界最好玩的游戏", score: 98, platforms: "手游", genre: "策略竞技" },
+            "荒野乱斗": { tag: "快节奏竞技", score: 88, platforms: "手游", genre: "动作竞技" },
+            "部落冲突": { tag: "策略养成鼻祖", score: 87, platforms: "手游", genre: "策略" },
+            "王者荣耀": { tag: "国民MOBA", score: 89, platforms: "手游", genre: "MOBA" },
+            "蛋仔派对": { tag: "派对休闲", score: 85, platforms: "手游", genre: "派对" },
+            "原神": { tag: "开放世界手游标杆", score: 92, platforms: "手游/PC", genre: "开放世界RPG" },
+            "崩坏星穹铁道": { tag: "回合制RPG精品", score: 91, platforms: "手游/PC", genre: "回合制RPG" },
+            "明日方舟": { tag: "硬核塔防", score: 90, platforms: "手游/PC", genre: "策略塔防" },
+            "恋与深空": { tag: "次世代恋爱", score: 86, platforms: "手游", genre: "3D恋爱" },
+            "未定事件簿": { tag: "推理恋爱", score: 84, platforms: "手游", genre: "悬疑恋爱" },
+            "闪耀暖暖": { tag: "时尚换装", score: 85, platforms: "手游", genre: "换装养成" },
+            "公主连结": { tag: "番剧品质", score: 86, platforms: "手游", genre: "JRPG" },
+            "阴阳师": { tag: "东方幻想", score: 84, platforms: "手游/PC", genre: "回合制" },
+            "三国志战略版": { tag: "深度SLG", score: 88, platforms: "手游", genre: "策略" },
+            // ===== 动作/魂系 =====
+            "艾尔登法环": { tag: "开放世界魂系巅峰", score: 96, platforms: "PC/主机", genre: "动作RPG" },
+            "只狼": { tag: "剑道美学极致", score: 95, platforms: "PC/主机", genre: "动作" },
+            "黑暗之魂3": { tag: "魂系集大成者", score: 94, platforms: "PC/主机", genre: "动作RPG" },
+            "茶杯头": { tag: "硬核艺术佳作", score: 93, platforms: "PC/主机", genre: "平台动作" },
+            "空洞骑士": { tag: "独立魂类神作", score: 95, platforms: "PC/主机/手游", genre: "动作" },
+            "哈迪斯": { tag: "Rogue-like革命者", score: 95, platforms: "PC/主机", genre: "Roguelite" },
+            "卧龙：苍天陨落": { tag: "三国魂系", score: 87, platforms: "PC/主机", genre: "动作" },
+            "街霸VI": { tag: "格斗游戏复兴之作", score: 92, platforms: "PC/主机", genre: "格斗" },
+            // ===== RPG/叙事 =====
+            "巫师3": { tag: "开放世界RPG神作", score: 97, platforms: "PC/主机", genre: "开放世界RPG" },
+            "博德之门3": { tag: "CRPG世代之作", score: 97, platforms: "PC/主机", genre: "CRPG" },
+            "女神异闻录5皇家版": { tag: "JRPG封神之作", score: 95, platforms: "PC/主机", genre: "JRPG" },
+            "最终幻想XVI": { tag: "FF系列新纪元", score: 88, platforms: "PC/主机", genre: "动作RPG" },
+            "最终幻想VII重制版": { tag: "经典重生", score: 90, platforms: "PC/主机", genre: "动作RPG" },
+            "极乐迪斯科": { tag: "叙事神作", score: 97, platforms: "PC", genre: "CRPG" },
+            "火焰纹章：风花雪月": { tag: "策略RPG杰作", score: 90, platforms: "Switch", genre: "策略RPG" },
+            "勇者斗恶龙XI": { tag: "JRPG经典之作", score: 91, platforms: "PC/主机", genre: "JRPG" },
+            "控制": { tag: "新奇叙事体验", score: 88, platforms: "PC/主机", genre: "动作冒险" },
+            // ===== 开放世界/冒险 =====
+            "塞尔达传说：王国之泪": { tag: "开放世界天花板", score: 96, platforms: "Switch", genre: "动作冒险" },
+            "霍格沃茨之遗": { tag: "魔法世界梦想成真", score: 85, platforms: "PC/主机", genre: "开放世界" },
+            "地平线西之绝境": { tag: "视觉震撼大作", score: 89, platforms: "PC/主机", genre: "开放世界" },
+            "对马岛之魂": { tag: "武士美学佳作", score: 88, platforms: "PC/主机", genre: "动作冒险" },
+            "死亡搁浅": { tag: "步行模拟哲学", score: 82, platforms: "PC/主机", genre: "动作" },
+            // ===== 射击/竞技 =====
+            "CS2": { tag: "射击竞技经典", score: 90, platforms: "PC", genre: "战术射击" },
+            "APEX英雄": { tag: "战术竞技精品", score: 91, platforms: "PC/主机", genre: "战术竞技" },
+            "瓦罗兰特": { tag: "战术射击新标杆", score: 90, platforms: "PC", genre: "战术射击" },
+            "英雄联盟": { tag: "MOBA统治者", score: 90, platforms: "PC", genre: "MOBA" },
+            "Dota2": { tag: "MOBA深度之王", score: 91, platforms: "PC", genre: "MOBA" },
+            "绝地求生": { tag: "大逃杀开创者", score: 86, platforms: "PC", genre: "大逃杀" },
+            "云顶之弈": { tag: "自走棋进化形态", score: 87, platforms: "PC/手游", genre: "自走棋" },
+            // ===== 独立游戏 =====
+            "星露谷物语": { tag: "像素田园治愈", score: 95, platforms: "全平台", genre: "农场模拟" },
+            "我的世界": { tag: "创造力无限", score: 93, platforms: "全平台", genre: "沙盒" },
+            "动物森友会": { tag: "岛屿生活治愈系", score: 90, platforms: "Switch", genre: "生活模拟" },
+            "杀戮尖塔": { tag: "卡牌Rogue鼻祖", score: 93, platforms: "全平台", genre: "Roguelike" },
+            "死亡细胞": { tag: "动作肉鸽精品", score: 92, platforms: "全平台", genre: "Roguelite" },
+            "蔚蓝": { tag: "平台跳跃与心理疗愈", score: 94, platforms: "PC/主机", genre: "平台" },
+            "以撒的结合：胎衣+": { tag: "Rogue地牢传奇", score: 95, platforms: "PC/主机", genre: "Roguelike" },
+            "胡闹厨房2": { tag: "友谊粉碎机", score: 87, platforms: "全平台", genre: "派对" },
+            "人类一败涂地": { tag: "物理派对欢乐王", score: 85, platforms: "全平台", genre: "派对" },
+            // ===== 策略/模拟 =====
+            "文明VI": { tag: "回合策略教科书", score: 92, platforms: "PC/主机", genre: "回合策略" },
+            "博德之门3": { tag: "RPG策略融合极品", score: 97, platforms: "PC/主机", genre: "CRPG" },
+            "英雄连3": { tag: "即时战略精髓", score: 87, platforms: "PC", genre: "RTS" },
+            "三国志战略版": { tag: "国产SLG标杆", score: 88, platforms: "手游", genre: "策略" },
+            // ===== MMORPG =====
+            "魔兽世界": { tag: "MMORPG永远的神", score: 93, platforms: "PC", genre: "MMORPG" },
+            "最终幻想XIV": { tag: "剧情最佳MMO", score: 91, platforms: "PC/主机", genre: "MMORPG" },
+            "命运方舟": { tag: "动作MMO精品", score: 86, platforms: "PC", genre: "MMORPG" },
+            // ===== 其他 =====
+            "宝可梦朱紫": { tag: "收集养成国民游戏", score: 73, platforms: "Switch", genre: "RPG" },
         };
 
         // ==================== 测试状态 ====================
@@ -2084,15 +2248,18 @@
                 recommendedGames.push("皇室战争");
             }
             
-            const gamesHtml = recommendedGames.slice(0, 6).map(g => {
-                const gameInfo = allGames[g] || { tag: "推荐游戏" };
+            const gamesHtml = recommendedGames.slice(0, 8).map(g => {
+                const gameInfo = allGames[g] || { tag: "推荐游戏", score: null, platforms: "", genre: "" };
                 const firstChar = g.charAt(0);
                 const isHighlight = g === "皇室战争";
+                const scoreBadge = gameInfo.score ? `<span class="game-score">${gameInfo.score}</span>` : '';
+                const platformBadge = gameInfo.platforms ? `<span class="game-platform">${gameInfo.platforms}</span>` : '';
                 return `
                     <div class="game-card ${isHighlight ? 'highlight' : ''}">
                         <div class="game-icon"><span class="game-initial">${firstChar}</span></div>
                         <div class="game-name">${g}</div>
-                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐必玩' : ''}</span>
+                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐' : ''}</span>
+                        <div class="game-meta">${scoreBadge}${platformBadge}</div>
                     </div>
                 `;
             }).join('');
@@ -2212,15 +2379,18 @@
                         if (!recommendedGames.includes("皇室战争")) {
                             recommendedGames.push("皇室战争");
                         }
-            const gamesHtml = recommendedGames.slice(0, 6).map(g => {
-                const gameInfo = allGames[g] || { tag: "推荐游戏" };
+            const gamesHtml = recommendedGames.slice(0, 8).map(g => {
+                const gameInfo = allGames[g] || { tag: "推荐游戏", score: null, platforms: "", genre: "" };
                 const firstChar = g.charAt(0);
                 const isHighlight = g === "皇室战争";
+                const scoreBadge = gameInfo.score ? `<span class="game-score">${gameInfo.score}</span>` : '';
+                const platformBadge = gameInfo.platforms ? `<span class="game-platform">${gameInfo.platforms}</span>` : '';
                 return `
                     <div class="game-card ${isHighlight ? 'highlight' : ''}">
                         <div class="game-icon"><span class="game-initial">${firstChar}</span></div>
                         <div class="game-name">${g}</div>
-                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐必玩' : ''}</span>
+                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐' : ''}</span>
+                        <div class="game-meta">${scoreBadge}${platformBadge}</div>
                     </div>
                 `;
             }).join('');
