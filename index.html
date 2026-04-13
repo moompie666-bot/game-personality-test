@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏人格测试 - 你的本命游戏是什么？</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-1: #8B5CF6;
+            --primary-2: #06B6D4;
+            --primary-3: #EC4899;
+            --bg-1: #0F0F1A;
+            --bg-2: #1A1A2E;
+            --bg-3: #16213E;
+            --text-1: #FFFFFF;
+            --text-2: #E0E0E0;
+            --text-3: #A0A0A0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --gradient-1: linear-gradient(135deg, #8B5CF6, #EC4899);
+            --gradient-2: linear-gradient(135deg, #06B6D4, #8B5CF6);
+            --gradient-3: linear-gradient(135deg, #EC4899, #06B6D4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-1);
+            color: var(--text-1);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 动态背景 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(2%, 2%) rotate(1deg); }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); }
+        }
+
+        /* 像素风格背景 */
+        .pixel-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-color: #1a1a2e;
+            background-image: 
+                linear-gradient(transparent 0%, rgba(0,0,0,0.1) 50%, transparent 50%),
+                linear-gradient(90deg, rgba(255,0,0,0.03) 0%, transparent 33%, rgba(0,255,0,0.03) 66%, transparent 100%);
+            background-size: 4px 4px, 12px 12px;
+            image-rendering: pixelated;
+        }
+
+        /* 像素星星装饰 */
+        .pixel-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .pixel-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .pixel-star::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            top: -4px;
+            left: 0;
+        }
+
+        .pixel-star::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            bottom: -4px;
+            left: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* 浮动装饰元素 */
+        .floating-decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 16px;
+            opacity: 0.4;
+            animation: float 15s ease-in-out infinite;
+            /* 像素风格 */
+            image-rendering: pixelated;
+            font-family: monospace;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: -3s; font-size: 20px; }
+        .floating-icon:nth-child(3) { top: 60%; left: 5%; animation-delay: -6s; }
+        .floating-icon:nth-child(4) { top: 70%; right: 10%; animation-delay: -9s; font-size: 18px; }
+        .floating-icon:nth-child(5) { top: 40%; left: 85%; animation-delay: -12s; }
+        .floating-icon:nth-child(6) { bottom: 15%; left: 20%; animation-delay: -2s; font-size: 14px; }
+        .floating-icon:nth-child(7) { bottom: 25%; right: 25%; animation-delay: -5s; }
+        .floating-icon:nth-child(8) { top: 85%; left: 70%; animation-delay: -8s; font-size: 22px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-8px) rotate(180deg); }
+            75% { transform: translateY(-20px) rotate(270deg); }
+        }
+
+        /* 网格线背景 - 像素风格 */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+
+        /* 扫描线效果 */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.03) 0px,
+                rgba(0, 0, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.5;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 页面 */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 欢迎页 */
+        .welcome-page {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: var(--gradient-1);
+            border-radius: 40px;
+            filter: blur(60px);
+            opacity: 0.4;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: var(--gradient-1);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: 
+                0 0 60px rgba(139, 92, 246, 0.4),
+                0 0 100px rgba(236, 72, 153, 0.2);
+            animation: pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(139, 92, 246, 0.4), 0 0 100px rgba(236, 72, 153, 0.2); }
+            50% { box-shadow: 0 0 80px rgba(139, 92, 246, 0.6), 0 0 120px rgba(236, 72, 153, 0.4); }
+        }
+
+        .main-title {
+            font-size: clamp(36px, 8vw, 56px);
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .subtitle {
+            font-size: clamp(16px, 4vw, 20px);
+            color: var(--text-3);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--primary-1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tag:hover::before {
+            left: 100%;
+        }
+
+        .tag:hover {
+            background: rgba(139, 92, 246, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .start-btn:hover::before {
+            left: 100%;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(139, 92, 246, 0.5);
+        }
+
+        .start-btn svg {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-tip {
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--text-3);
+        }
+
+        .welcome-tip span {
+            color: var(--primary-2);
+        }
+
+        /* 装饰性分隔线 */
+        .decorative-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 30px 0;
+            opacity: 0.6;
+        }
+
+        .divider-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-1), transparent);
+        }
+
+        .divider-icon {
+            font-size: 12px;
+        }
+
+        /* 测试页 */
+        .test-page {
+            padding: 40px 20px;
+        }
+
+        .progress-container {
+            margin-bottom: 40px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: var(--text-3);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--bg-2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .question-card {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        .question-number {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--gradient-1);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .question-text {
+            font-size: clamp(18px, 4vw, 22px);
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .option {
+            padding: 20px 24px;
+            background: rgba(15, 15, 26, 0.6);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+            transition: left 0.3s ease;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--primary-1);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: rgba(139, 92, 246, 0.25);
+            border-color: var(--primary-1);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .option-letter {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-2);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option.selected .option-letter {
+            background: var(--gradient-1);
+        }
+
+        .option-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .option.selected .option-text {
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.prev {
+            background: transparent;
+            border: 2px solid var(--primary-1);
+            color: var(--primary-1);
+        }
+
+        .nav-btn.prev:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .nav-btn.next {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 5px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .nav-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(139, 92, 246, 0.5);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 结果页 */
+        .result-page {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .result-header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* 人格头像 */
+        .result-avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+        }
+
+        .result-avatar-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            height: 220px;
+            background: var(--gradient-1);
+            border-radius: 30px;
+            filter: blur(40px);
+            opacity: 0.4;
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        .result-avatar {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 24px;
+            object-fit: cover;
+            border: 3px solid rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(236, 72, 153, 0.15);
+            z-index: 1;
+            background: var(--bg-2);
+        }
+
+        .result-avatar-container.hidden {
+            display: none;
+        }
+
+        .result-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--primary-2);
+            margin-bottom: 20px;
+        }
+
+        .result-label {
+            font-size: 16px;
+            color: var(--text-3);
+            margin-bottom: 16px;
+        }
+
+        .result-type {
+            font-size: clamp(40px, 10vw, 64px);
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            animation: resultGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes resultGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3)); }
+            50% { filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.5)); }
+        }
+
+        .result-name {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 700;
+            color: var(--text-1);
+            margin-bottom: 20px;
+        }
+
+        .result-quote {
+            font-size: 18px;
+            color: var(--primary-2);
+            font-style: italic;
+            padding: 20px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-2);
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .result-quote::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 40px;
+            color: var(--primary-2);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .result-desc {
+            font-size: 16px;
+            color: var(--text-2);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            text-align: left;
+            padding: 24px;
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .dimensions-result {
+            margin-bottom: 40px;
+        }
+
+        .dimensions-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .dimension-item {
+            padding: 16px;
+            background: rgba(15, 15, 26, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dimension-item:hover {
+            border-color: var(--primary-1);
+            transform: translateY(-3px);
+        }
+
+        .dimension-label {
+            font-size: 12px;
+            color: var(--text-3);
+            margin-bottom: 8px;
+        }
+
+        .dimension-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-2);
+        }
+
+        .games-section {
+            margin-bottom: 40px;
+        }
+
+        .games-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .games-title::before,
+        .games-title::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--gradient-1);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            padding: 24px 20px;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-1);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .game-card.highlight {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--primary-1);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .game-card.highlight .game-tag {
+            background: rgba(139, 92, 246, 0.3);
+            color: var(--primary-1);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: var(--gradient-2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            overflow: hidden;
+        }
+
+        .game-initial {
+            font-size: 28px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .game-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .game-tag {
+            font-size: 12px;
+            padding: 4px 12px;
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--primary-2);
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .share-section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .share-card {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 600px;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 24px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .share-card-inner {
+            text-align: center;
+        }
+
+        .share-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .share-type {
+            font-size: 14px;
+            color: var(--primary-2);
+            margin-bottom: 8px;
+        }
+
+        .share-name {
+            font-size: 36px;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .share-quote {
+            font-size: 16px;
+            color: var(--primary-2);
+            font-style: italic;
+            padding: 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .share-games {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .share-game-item {
+            padding: 8px 16px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        .share-qr {
+            font-size: 14px;
+            color: var(--text-3);
+            padding-top: 16px;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .screenshot-btn {
+            background: var(--gradient-1);
+        }
+
+        .share-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .share-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            background: rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-action-btn:hover {
+            background: rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .link-btn {
+            background: var(--gradient-2);
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            background: var(--gradient-3);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 30px rgba(236, 72, 153, 0.4);
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(236, 72, 153, 0.5);
+        }
+
+        .restart-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-1);
+            background: transparent;
+            border: 2px solid var(--primary-1);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            border: 4px solid rgba(139, 92, 246, 0.2);
+            border-top-color: var(--primary-1);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: var(--text-2);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .question-card {
+                padding: 24px 16px;
+            }
+
+            .option {
+                padding: 14px 16px;
+            }
+
+            .option-letter {
+                width: 36px;
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                width: 100%;
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+            .floating-icon {
+                display: none;
+            }
+
+            .share-section {
+                padding: 0 10px;
+            }
+
+            .share-btn, .share-action-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                font-size: 15px;
+                padding: 14px 20px;
+            }
+
+            .share-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .game-card {
+                padding: 16px 12px;
+            }
+
+            .game-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .game-name {
+                font-size: 14px;
+            }
+
+            .result-avatar-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .result-avatar {
+                width: 150px;
+                height: 150px;
+                border-radius: 20px;
+            }
+
+            .result-avatar-glow {
+                width: 170px;
+                height: 170px;
+            }
+
+            .result-type {
+                font-size: 36px;
+            }
+
+            .result-name {
+                font-size: 22px;
+            }
+
+            .share-card {
+                width: 100%;
+                padding: 24px;
+                border-radius: 16px;
+            }
+
+            .share-name {
+                font-size: 28px;
+            }
+
+            .share-game-item {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .dimensions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .dimension-item {
+                padding: 12px;
+            }
+
+            .welcome-page {
+                padding: 40px 16px;
+            }
+
+            .logo-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 50px;
+            }
+
+            .start-btn {
+                padding: 16px 36px;
+                font-size: 18px;
+            }
+
+            .main-title {
+                font-size: 32px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tag {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dimension-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pixel-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="pixel-stars" id="pixelStars"></div>
+    <div class="scanlines"></div>
+    
+    <div class="floating-decorations">
+        <span class="floating-icon">[@]</span>
+        <span class="floating-icon">[O]</span>
+        <span class="floating-icon">[X]</span>
+        <span class="floating-icon">[+]</span>
+        <span class="floating-icon">[*]</span>
+        <span class="floating-icon">[^]</span>
+        <span class="floating-icon">[<3]</span>
+        <span class="floating-icon">[=]</span>
+    </div>
+    
+    <div class="container">
+        <!-- 欢迎页 -->
+        <div id="welcomePage" class="page welcome-page active">
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <div class="logo-icon">🎮</div>
+                <h1 class="main-title">游戏人格测试</h1>
+                <p class="subtitle">
+                    还在纠结玩什么游戏？<br>
+                    30道题帮你找到你的本命游戏！
+                </p>
+            </div>
+            
+            <div class="tags">
+                <span class="tag">🕹️ 趣味测试</span>
+                <span class="tag">⚡ 30道题</span>
+                <span class="tag">🎯 精准推荐</span>
+                <span class="tag">😂 爆笑结果</span>
+            </div>
+            
+            <button class="start-btn" onclick="startTest()">
+                开始测试
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+            
+            <div class="decorative-divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">★</span>
+                <span class="divider-line"></span>
+            </div>
+            
+            <p class="welcome-tip">⏱️ 预计完成时间：<span>3-5分钟</span></p>
+        </div>
+
+        <!-- 测试页 -->
+        <div id="testPage" class="page test-page">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span class="progress-text">题目 <span id="currentQ">1</span> / <span id="totalQ">30</span></span>
+                    <span class="progress-text" id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <span class="question-number" id="questionNumber">第 1 题</span>
+                <p class="question-text" id="questionText"></p>
+                
+                <div class="options" id="optionsContainer"></div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn prev" id="prevBtn" onclick="prevQuestion()" disabled>
+                    ← 上一题
+                </button>
+                <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()" disabled>
+                    下一题 →
+                </button>
+            </div>
+        </div>
+
+        <!-- 加载页 -->
+        <div id="loadingPage" class="page loading">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">正在分析你的游戏人格...</p>
+        </div>
+
+        <!-- 结果页 -->
+        <div id="resultPage" class="page result-page">
+            <div class="result-header">
+                <div class="result-badge">
+                    <span>🎯</span>
+                    <span>测试完成</span>
+                </div>
+                <div class="result-avatar-container" id="resultAvatarContainer">
+                    <div class="result-avatar-glow"></div>
+                    <img class="result-avatar" id="resultAvatar" src="" alt="人格头像" onerror="this.parentElement.classList.add('hidden')">
+                </div>
+                <p class="result-label">你的游戏人格是</p>
+                <h2 class="result-type" id="resultType"></h2>
+                <h3 class="result-name" id="resultName"></h3>
+                <div class="result-quote" id="resultQuote"></div>
+            </div>
+
+            <div class="result-desc" id="resultDesc"></div>
+
+            <div class="dimensions-result">
+                <h4 class="dimensions-title">
+                    <span>📊</span>
+                    <span>你的游戏属性</span>
+                </h4>
+                <div class="dimensions-grid" id="dimensionsGrid"></div>
+            </div>
+
+            <div class="games-section">
+                <h4 class="games-title">🎮 推荐游戏清单</h4>
+                <div class="games-grid" id="gamesGrid"></div>
+            </div>
+
+            <div class="share-section">
+                <button class="share-btn screenshot-btn" onclick="copyFullAnalysis()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                    📋 一键复制分析结果
+                </button>
+                <button class="share-btn link-btn" onclick="copyShareLink()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    🔗 复制分享链接
+                </button>
+            </div>
+
+            <button class="restart-btn" onclick="restartTest()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 4v6h6M23 20v-6h-6"/>
+                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                </svg>
+                重新测试
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 题目数据 ====================
+        const questions = [
+            // === 投入度(dedication)主维度题 - 6题 ===
+            {
+                dimension: "dedication",
+                text: "队友在团战关键时刻突然掉线，你会？",
+                options: [
+                    { text: "心态爆炸，疯狂点投降", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "默默守家，期待他重连", score: { dedication: 3, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "无所谓，一个人也能打", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 1 } }
+                ]
+            },
+            {
+                dimension: "dedication",
+                text: "游戏中的每日任务，你会？",
+                options: [
+                    { text: "必须全清，一个不落", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "选择性做，奖励好的才做", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "随缘，有空就做没空就算", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "dedication",
+                text: "游戏更新了大版本，你会？",
+                options: [
+                    { text: "第一时间体验，肝到停不下来", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "等几天看攻略再决定怎么玩", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "什么更新？反正我afk了", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "dedication",
+                text: "你的游戏时间通常？",
+                options: [
+                    { text: "通宵达旦，肝到天亮", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "每天固定玩几小时，有自律", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "碎片时间，蹲坑时来一把", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "dedication",
+                text: "你会因为游戏影响睡眠吗？",
+                options: [
+                    { text: "经常通宵，明天再说", score: { dedication: 3, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "偶尔，但会设闹钟提醒", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "从不，到点就睡", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "dedication",
+                text: "你每月在游戏上的花费（时间或金钱）是？",
+                options: [
+                    { text: "能充就充，氪金使我快乐", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "月卡党，理性消费", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "0氪金，白嫖到底", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            // === 社交性(social)主维度题 - 6题 ===
+            {
+                dimension: "social",
+                text: "打游戏时，你更喜欢？",
+                options: [
+                    { text: "开黑！和朋友语音才好玩", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "看队友操作，适时发个\"干得漂亮\"", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "单排，拒绝一切社交", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "social",
+                text: "公屏有人求带，你会？",
+                options: [
+                    { text: "主动私聊：来来来，我带你", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "无视，继续自己的游戏", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "打字嘲讽：这么菜还想要人带？", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "social",
+                text: "在世界频道聊天时，你通常是？",
+                options: [
+                    { text: "话痨本痨，哪里都有我", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "偶尔插科打诨，活跃气氛", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "默默围观，从不发言", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "social",
+                text: "游戏里有人对你示好/组CP，你会？",
+                options: [
+                    { text: "欣然接受，甜甜的恋爱开始", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "害羞拒绝，还是当朋友吧", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "已有对象，游戏里不搞这些", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "social",
+                text: "加入游戏公会，你最看重的是？",
+                options: [
+                    { text: "活跃氛围，大家都能聊起来", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "公会实力，强力队友带我飞", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "佛系养老，不参与公会活动", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "social",
+                text: "游戏遇到瓶颈时，你会？",
+                options: [
+                    { text: "叫人一起组队闯关", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "在世界频道求助大佬", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "查攻略看视频，自力更生", score: { dedication: 1, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                ]
+            },
+            // === 竞技心(competitive)主维度题 - 6题 ===
+            {
+                dimension: "competitive",
+                text: "排位赛连跪10把，你会？",
+                options: [
+                    { text: "砸键盘！这游戏机制有问题", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "休息一下，明天再战", score: { dedication: 1, social: 0, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "正好掉段，可以带妹了", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "competitive",
+                text: "你的游戏目标是？",
+                options: [
+                    { text: "上王者！冲上最高段位", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "收集全图鉴，完美主义", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "开心就好，输赢不重要", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "competitive",
+                text: "看到别人秀操作，你的反应是？",
+                options: [
+                    { text: "研究学习，下次我也要秀", score: { dedication: 1, social: 0, competitive: 2, exploration: 0, action: 1 } },
+                    { text: "发\"6\"，然后继续打游戏", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "举报！这肯定是外挂", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "competitive",
+                text: "官方出了英雄削弱补丁，你会？",
+                options: [
+                    { text: "第一时间研究新版打法", score: { dedication: 1, social: 0, competitive: 2, exploration: 0, action: 1 } },
+                    { text: "骂策划，然后坚持用本命", score: { dedication: 0, social: 0, competitive: 2, exploration: 0, action: 0 } },
+                    { text: "换个英雄玩，反正都会", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "competitive",
+                text: "你更喜欢PVP还是PVE？",
+                options: [
+                    { text: "PVP！与人斗其乐无穷", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 1 } },
+                    { text: "PVE，享受剧情和挑战BOSS", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 1 } },
+                    { text: "都可以，看心情", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "competitive",
+                text: "当你的段位比朋友高时，你会？",
+                options: [
+                    { text: "带朋友上分，义不容辞", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "开小号陪朋友玩", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "各玩各的，不想被拖累", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } }
+                ]
+            },
+            // === 探索欲(exploration)主维度题 - 6题 ===
+            {
+                dimension: "exploration",
+                text: "游戏里抽卡（非酋警告），你首次十连就出了金色传说，你会？",
+                options: [
+                    { text: "截图发朋友圈，奔走相告", score: { dedication: 0, social: 1, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "假装淡定，心里乐开花", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } },
+                    { text: "继续抽，我要更多！", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } }
+                ]
+            },
+            {
+                dimension: "exploration",
+                text: "你更喜欢线性剧情还是开放世界？",
+                options: [
+                    { text: "开放世界！自由探索才爽", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "线性剧情，专注叙事体验", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } },
+                    { text: "无所谓，有好玩法就行", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 1 } }
+                ]
+            },
+            {
+                dimension: "exploration",
+                text: "游戏荒时，你会？",
+                options: [
+                    { text: "狂刷老游戏，挖掘冷门佳作", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "等新游发布，空窗期正好休息", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "转战其他娱乐，游戏只是之一", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "exploration",
+                text: "看到游戏打折促销，你会？",
+                options: [
+                    { text: "先买爆！入库吃灰没关系", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "等骨折再买，等等党永不为奴", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "只买自己会玩的，不冲动消费", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "exploration",
+                text: "游戏BUG被发现时，你会？",
+                options: [
+                    { text: "疯狂利用，报错的bug是香的", score: { dedication: 0, social: 0, competitive: 1, exploration: 2, action: 0 } },
+                    { text: "反馈官方，等待修复", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "无视它，不影响我玩就行", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "exploration",
+                text: "等待游戏加载时，你会？",
+                options: [
+                    { text: "刷攻略视频，研究技巧", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "刷短视频，等人齐再说", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "开小窗看剧，一举两得", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                ]
+            },
+            // === 操作偏好(action)主维度题 - 6题 ===
+            {
+                dimension: "action",
+                text: "你喜欢什么画风的游戏？",
+                options: [
+                    { text: "硬核写实，真实感拉满", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 3 } },
+                    { text: "卡通可爱，萌萌哒最香", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "二次元，纸片人老婆赛高", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                ]
+            },
+            {
+                dimension: "action",
+                text: "你更倾向哪种玩法？",
+                options: [
+                    { text: "策略烧脑，运筹帷幄", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 2 } },
+                    { text: "操作爽感，连招要秀", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 3 } },
+                    { text: "社交聊天，养老游戏", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "action",
+                text: "你的本命游戏特点是？",
+                options: [
+                    { text: "硬核难度，虐我千百遍还爱他", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 3 } },
+                    { text: "社交属性强，玩的就是朋友", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "佛系养老，钓鱼种田", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                ]
+            },
+            {
+                dimension: "action",
+                text: "你更青睐哪种音乐/音效的游戏？",
+                options: [
+                    { text: "史诗交响乐，沉浸感拉满", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 2 } },
+                    { text: "电子嗨曲，打游戏要有节奏", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 2 } },
+                    { text: "无所谓，不影响我操作", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "action",
+                text: "如果用一种动物形容你的游戏风格，你选？",
+                options: [
+                    { text: "狼，独来独往的猎手", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 3 } },
+                    { text: "狐狸，狡猾又可爱", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 1 } },
+                    { text: "熊猫，憨厚佛系养生", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                ]
+            },
+            {
+                dimension: "action",
+                text: "你玩游戏时吃东西吗？",
+                options: [
+                    { text: "必须边玩边吃，快乐加倍", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "专心玩游戏，吃完再玩", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 2 } },
+                    { text: "不存在，我玩游戏顾不上吃", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 1 } }
+                ]
+            }
+        ];
+
+        // ==================== 人格类型数据 ====================
+        const personalities = {
+            "GOD_HAND": {
+                type: "PRO-GAMER",
+                name: "操作怪",
+                quote: "这操作，只要练三年就能打出来。",
+                desc: "别人搓招搓半天，你一个键就放出去了。BOSS三管血你三秒打完，队友直呼挂逼。你嘴上说\"没没没\"，心里想的是\"就这？\"。去当电竞选手吧，反正上班也是敲键盘。",
+                dimensions: { dedication: "硬核投入", social: "独行猎手", competitive: "分奴本奴", exploration: "效率优先", action: "操作天花板" },
+                games: ["艾尔登法环", "黑暗之魂系列", "街霸VI", "CS2", "APEX英雄"]
+            },
+            "STRATEGIST": {
+                type: "MASTER",
+                name: "谋士型玩家",
+                quote: "这局我在第五层，对手在第一层。",
+                desc: "开局你就知道这局稳了。对面蹲草丛？早看穿了。队友问你怎么知道的，你说\"意识\"。其实就是脑子好使，下棋的心算水平拿来打游戏，纯纯降维打击。",
+                dimensions: { dedication: "运筹帷幄", social: "精英社交", competitive: "胜券在握", exploration: "深度研究", action: "策略流" },
+                games: ["云顶之弈", "三国志战略版", "英雄连", "博德之门3", "文明VI"]
+            },
+            "SOCIAL_BUTTERFLY": {
+                type: "SQUAD-LEADER",
+                name: "开黑狂魔",
+                quote: "人不在一起，灵魂怎么在一起？",
+                desc: "单排？不可能，绝对不可能。一个人打游戏等于坐牢。你是群里的粘合剂，负责叫人、组局、活跃气氛。没有你的群早就凉了。你的游戏技术可能一般，但朋友绝对最多。",
+                dimensions: { dedication: "随叫随到", social: "社交达人", competitive: "娱乐第一", exploration: "体验分享", action: "组队型选手" },
+                games: ["蛋仔派对", "王者荣耀", "我的世界", "动物森友会", "胡闹厨房"]
+            },
+            "COLLECTOR": {
+                type: "COMPLETIONIST",
+                name: "全图鉴战士",
+                quote: "差一点就全图鉴了...再抽十连！",
+                desc: "别人笑你太疯癫，你笑别人看不穿。肝了三天三夜就为一个绝版道具，值吗？你说值。成就100%那一刻的快感，上班发工资都比不了。你不是在玩游戏，你是在完成一项伟大事业。",
+                dimensions: { dedication: "肝帝在线", social: "安静收集", competitive: "自娱自乐", exploration: "收集强迫症", action: "完美主义" },
+                games: ["原神", "明日方舟", "阴阳师", "闪耀暖暖", "宝可梦"]
+            },
+            "CHILL_GAMER": {
+                type: "ZEN-MASTER",
+                name: "躺平仙人",
+                quote: "输赢乃兵家常事，大侠请重新来过。",
+                desc: "队友挂机了，你帮他打。输了一整晚，你还在笑。有人骂你菜，你直接屏蔽然后继续钓鱼。你不是不认真，你只是觉得认真的人有点好笑。游戏嘛，较真就输了。",
+                dimensions: { dedication: "佛系本佛", social: "安静美男子", competitive: "无欲无求", exploration: "随缘探索", action: "养老专家" },
+                games: ["动物森友会", "星露谷物语", "我的世界", "集合啦！动物森友会", "星露谷"]
+            },
+            "TOXIC_GAMER": {
+                type: "KEYBOARD-WARRIOR",
+                name: "峡谷钢琴家",
+                quote: "干的漂亮！...我是说，对面的。",
+                desc: "打字速度130，队友菜了你比他还急。\"干得漂亮\"发出去的时候你就知道，这把又要打字解释为什么不是嘲讽了。你不是心态差，你只是太想赢了，真的。虽然赢了之后你会发现队友都被你骂跑了。",
+                dimensions: { dedication: "通宵冠军", social: "嘴强王者", competitive: "分奴无疑", exploration: "只看攻略", action: "情绪输出机" },
+                games: ["英雄联盟", "王者荣耀", "绝地求生", "CS2", "守望先锋"]
+            },
+            "NIGHT_OWL": {
+                type: "NIGHT-WOLF",
+                name: "深夜幽灵",
+                quote: "凌晨三点，正是游戏的好时候。",
+                desc: "白天你不是不想玩，是网不好、人太多、键盘不跟手。只有凌晨三点，队友睡了，对手也睡了，你才真正进入状态。恭喜你发现了游戏的正确打开方式。白天用来生存，凌晨用来生活。",
+                dimensions: { dedication: "夜猫子本猫", social: "独狼夜行", competitive: "暗中博弈", exploration: "深夜探索", action: "神秘刺客" },
+                games: ["CS2", "绝地求生", "英雄联盟", "Dota2", "瓦罗兰特"]
+            },
+            "CASUAL_CUTE": {
+                type: "CUTE-ADDICT",
+                name: "萌萌战士",
+                quote: "这个皮肤太可爱了吧！钱包你怎么了？",
+                desc: "强度是什么？能吃吗？你只知道这个皮肤的小裙子好好看。别人抽卡看技能，你抽卡看立绘。648氪出去的那一刻你告诉自己这是最后一次，然后下个新池子又出现了。你是游戏公司最喜欢的玩家类型。",
+                dimensions: { dedication: "随性所欲", social: "萌友遍天下", competitive: "随缘就好", exploration: "颜值即正义", action: "萌系休闲" },
+                games: ["原神", "蛋仔派对", "闪耀暖暖", "未定事件簿", "恋与深空"]
+            },
+            "HARDCORE": {
+                type: "SOULSLIKE",
+                name: "受苦传教士",
+                quote: "死了？正常，这游戏第一次过不算通关。",
+                desc: "简单模式？不存在。困难模式？热身而已。你享受卡关两小时通关十秒的快感，那一刻的成就感比中彩票还爽。别人骂策划的时候你在研究机制，别人退游的时候你在二周目。",
+                dimensions: { dedication: "硬核投入", social: "孤独战士", competitive: "超越自我", exploration: "研究机制", action: "抖M体质" },
+                games: ["艾尔登法环", "黑暗之魂系列", "只狼", "茶杯头", "霍格沃茨之遗"]
+            },
+            "GUILD_LEADER": {
+                type: "GUILD-LEADER",
+                name: "公会指挥官",
+                quote: "跟着我冲，赢了算你们的，输了算我的。",
+                desc: "你可能不是公会里最厉害的，但绝对是最能说的那个。开会你主持，打本你指挥，群里冷场你救场。你把公会当成另一个家，虽然这个家有时候会让你血压升高。但看到会员喊\"会长威武\"，一切都值了。",
+                dimensions: { dedication: "全勤标兵", social: "一呼百应", competitive: "团队荣耀", exploration: "统筹规划", action: "社交指挥官" },
+                games: ["魔兽世界", "最终幻想XIV", "王者荣耀", "部落冲突", "命运方舟"]
+            },
+            "MOBILE_MASTER": {
+                type: "HANDHELD-KING",
+                name: "手游战神",
+                quote: "谁说手机不能打职业？我就是行走的传说。",
+                desc: "什么？要用电脑打游戏？那多麻烦。手机掏出来就能玩，蹲厕所、挤地铁、午休时...这些都是你的游戏时间。你是手游王者，段位可能比很多PC玩家都高。便携即正义，你就是行走的电竞馆。",
+                dimensions: { dedication: "碎片大师", social: "随时组队", competitive: "轻度竞技", exploration: "快速体验", action: "手机宗师" },
+                games: ["荒野乱斗", "王者荣耀", "蛋仔派对", "部落冲突", "皇室战争"]
+            },
+            "STORY_LOVER": {
+                type: "NARRATIVE-FAN",
+                name: "剧情鉴赏师",
+                quote: "等等，这段对话我要听完再打怪。",
+                desc: "战斗？等下再说。这个NPC的故事我还没听完。别人速通花了两小时，你第一章剧情看了五小时。不是你慢，是你真的在体验游戏。隔壁老王问你游戏通关了吗，你说\"我在第48章\"。",
+                dimensions: { dedication: "沉浸体验", social: "安静欣赏", competitive: "无视胜负", exploration: "叙事鉴赏家", action: "剧情优先" },
+                games: ["巫师3", "最终幻想系列", "女神异闻录5", "原神", "崩坏星穹铁道", "勇者斗恶龙"]
+            },
+            "OPEN_WORLD": {
+                type: "ADVENTURER",
+                name: "开放世界探险家",
+                quote: "主线？先不急，我要去爬一下那座山。",
+                desc: "别人说你迷路，你说你叫探索。开局给你一张大地图，你能在新手村玩到账号被找回。什么主线任务？不存在的。你的人生哲学是：风景都在路上，重点不是终点，是沿途的每一块可以爬的石头。",
+                dimensions: { dedication: "自由散漫", social: "独行侠", competitive: "不争输赢", exploration: "探索至上", action: "风景党" },
+                games: ["塞尔达传说", "原神", "博德之门3", "霍格沃茨之遗", "星球工匠"]
+            },
+            "GACHA_MASTER": {
+                type: "GACHA-ADDICT",
+                name: "抽卡赌怪",
+                quote: "十连又歪了...下一发一定出货！",
+                desc: "数学期望？不存在。你只知道下一发就是拐点。别人648能买件衣服，你648扔进去听个响。但万一呢？万一就出货了呢？这份希望，值得你氪穿整个池子。",
+                dimensions: { dedication: "爆肝抽卡", social: "晒卡专员", competitive: "强度随缘", exploration: "玄学信仰", action: "赌徒心理" },
+                games: ["原神", "崩坏星穹铁道", "阴阳师", "明日方舟", "公主连结"]
+            }
+        };
+
+        // ==================== 游戏推荐池 ====================
+        const allGames = {
+            // 手游
+            "荒野乱斗": { tag: "快节奏竞技" },
+            "皇室战争": { tag: "全世界最好玩的游戏" },
+            "部落冲突": { tag: "策略养成" },
+            "王者荣耀": { tag: "MOBA竞技" },
+            "蛋仔派对": { tag: "休闲派对" },
+            // PC/主机游戏
+            "艾尔登法环": { tag: "硬核动作" },
+            "黑暗之魂系列": { tag: "受苦神作" },
+            "只狼": { tag: "剑斗美学" },
+            "塞尔达传说": { tag: "开放世界神作" },
+            "巫师3": { tag: "剧情巅峰" },
+            "博德之门3": { tag: "TRPG之王" },
+            "最终幻想系列": { tag: "日式RPG" },
+            "女神异闻录5": { tag: "Jrpg神作" },
+            "云顶之弈": { tag: "自走棋" },
+            "英雄联盟": { tag: "MOBA" },
+            "CS2": { tag: "射击竞技" },
+            "绝地求生": { tag: "战术竞技" },
+            "守望先锋": { tag: "MOBA射击" },
+            "瓦罗兰特": { tag: "战术射击" },
+            "Dota2": { tag: "MOBA" },
+            "我的世界": { tag: "沙盒创造" },
+            "茶杯头": { tag: "硬核跑酷" },
+            "动物森友会": { tag: "休闲社交" },
+            "星露谷物语": { tag: "农场养老" },
+            "霍格沃茨之遗": { tag: "魔法世界" },
+            "宝可梦": { tag: "收集养成" },
+            "勇者斗恶龙": { tag: "经典JRPG" },
+            "原神": { tag: "开放世界" },
+            "崩坏星穹铁道": { tag: "回合RPG" },
+            "明日方舟": { tag: "策略塔防" },
+            "阴阳师": { tag: "回合制" },
+            "闪耀暖暖": { tag: "换装收集" },
+            "未定事件簿": { tag: "推理恋爱" },
+            "恋与深空": { tag: "3D恋爱" },
+            "公主连结": { tag: "番剧游戏" },
+            "三国志战略版": { tag: "SLG策略" },
+            "英雄连": { tag: "RTS即时战略" },
+            "文明VI": { tag: "策略回合" },
+            "命运方舟": { tag: "MMORPG" },
+            "魔兽世界": { tag: "MMORPG" },
+            "最终幻想XIV": { tag: "MMORPG" },
+            "胡闹厨房": { tag: "友尽聚会" },
+            "星球工匠": { tag: "星球探索" },
+            "APEX英雄": { tag: "战术竞技" },
+            "街霸VI": { tag: "格斗游戏" }
+        };
+
+        // ==================== 测试状态 ====================
+        let currentQuestion = 0;
+        let lastResultKey = null; // 缓存最终结果，供复制/分享使用
+        let answers = [];
+        let scores = {
+            dedication: 0,
+            social: 0,
+            competitive: 0,
+            exploration: 0,
+            action: 0
+        };
+
+        // ==================== 页面控制 ====================
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function startTest() {
+            currentQuestion = 0;
+            answers = [];
+            scores = { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 };
+            lastResultKey = null;
+            document.getElementById('totalQ').textContent = questions.length;
+            showPage('testPage');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            document.getElementById('questionNumber').textContent = `第 ${currentQuestion + 1} 题`;
+            document.getElementById('questionText').textContent = q.text;
+            
+            const letters = ['A', 'B', 'C'];
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = q.options.map((opt, i) => `
+                <div class="option ${answers[currentQuestion] === i ? 'selected' : ''}" onclick="selectOption(${i})">
+                    <span class="option-letter">${letters[i]}</span>
+                    <span class="option-text">${opt.text}</span>
+                </div>
+            `).join('');
+
+            // 更新进度
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+
+            // 更新按钮
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = answers[currentQuestion] === undefined;
+        }
+
+        function selectOption(index) {
+            const q = questions[currentQuestion];
+            
+            // 如果之前已选过，先减去旧选项分数
+            if (answers[currentQuestion] !== undefined) {
+                const oldScore = q.options[answers[currentQuestion]].score;
+                for (let dim in oldScore) {
+                    scores[dim] -= oldScore[dim];
+                }
+            }
+            
+            answers[currentQuestion] = index;
+            
+            // 累加新选项分数
+            const selectedScore = q.options[index].score;
+            for (let dim in selectedScore) {
+                scores[dim] += selectedScore[dim];
+            }
+
+            // 更新选项样式
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.toggle('selected', i === index);
+            });
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                // 测试完成，显示加载
+                showPage('loadingPage');
+                setTimeout(showResult, 2000);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        // ==================== 结果计算 ====================
+        function calculateResult() {
+            // 动态计算maxScores：遍历所有题目，取每题对某维度最大可能分值的累加
+            const dims = ['dedication', 'social', 'competitive', 'exploration', 'action'];
+            const maxScores = {};
+            dims.forEach(dim => {
+                maxScores[dim] = 0;
+                questions.forEach(q => {
+                    let maxForQ = 0;
+                    q.options.forEach(opt => {
+                        if (opt.score[dim] > maxForQ) maxForQ = opt.score[dim];
+                    });
+                    maxScores[dim] += maxForQ;
+                });
+            });
+
+            // 计算百分比
+            const percentages = {};
+            for (let dim of dims) {
+                percentages[dim] = maxScores[dim] > 0 ? Math.round((scores[dim] / maxScores[dim]) * 100) : 0;
+            }
+
+            return matchPersonality(percentages);
+        }
+
+        function matchPersonality(pcts) {
+            // 14种人格标准画像向量 (L=25, M=50, H=75)
+            // 每种人格有独特的5维位置
+            const profiles = {
+                "GOD_HAND":          { dedication: 60, social: 25, competitive: 75, exploration: 30, action: 75 },
+                "STRATEGIST":        { dedication: 60, social: 40, competitive: 55, exploration: 70, action: 50 },
+                "SOCIAL_BUTTERFLY":  { dedication: 45, social: 75, competitive: 25, exploration: 40, action: 30 },
+                "COLLECTOR":         { dedication: 75, social: 25, competitive: 25, exploration: 75, action: 35 },
+                "CHILL_GAMER":       { dedication: 20, social: 40, competitive: 15, exploration: 30, action: 15 },
+                "TOXIC_GAMER":       { dedication: 70, social: 55, competitive: 75, exploration: 25, action: 50 },
+                "NIGHT_OWL":         { dedication: 75, social: 20, competitive: 65, exploration: 35, action: 55 },
+                "CASUAL_CUTE":       { dedication: 35, social: 55, competitive: 15, exploration: 60, action: 15 },
+                "HARDCORE":          { dedication: 75, social: 20, competitive: 50, exploration: 40, action: 75 },
+                "GUILD_LEADER":      { dedication: 65, social: 75, competitive: 50, exploration: 40, action: 45 },
+                "MOBILE_MASTER":     { dedication: 30, social: 50, competitive: 45, exploration: 30, action: 35 },
+                "STORY_LOVER":       { dedication: 55, social: 25, competitive: 15, exploration: 75, action: 30 },
+                "OPEN_WORLD":        { dedication: 45, social: 30, competitive: 20, exploration: 75, action: 45 },
+                "GACHA_MASTER":      { dedication: 70, social: 35, competitive: 25, exploration: 65, action: 25 }
+            };
+
+            // 每种人格的关键维度（权重1.5），非关键维度权重1.0
+            const keyDims = {
+                "GOD_HAND":          ["competitive", "action"],
+                "STRATEGIST":        ["exploration", "competitive"],
+                "SOCIAL_BUTTERFLY":  ["social"],
+                "COLLECTOR":         ["exploration", "dedication"],
+                "CHILL_GAMER":       ["competitive", "dedication", "action"], // 反向关键
+                "TOXIC_GAMER":       ["competitive", "dedication"],
+                "NIGHT_OWL":         ["dedication", "competitive"],
+                "CASUAL_CUTE":       ["action", "exploration"],
+                "HARDCORE":          ["action", "dedication"],
+                "GUILD_LEADER":      ["social", "dedication"],
+                "MOBILE_MASTER":     ["dedication", "social"],
+                "STORY_LOVER":       ["exploration", "competitive"],
+                "OPEN_WORLD":        ["exploration", "action"],
+                "GACHA_MASTER":      ["dedication", "exploration"]
+            };
+
+            let bestMatch = "CHILL_GAMER";
+            let bestDist = Infinity;
+
+            const dims = ['dedication', 'social', 'competitive', 'exploration', 'action'];
+
+            for (let pKey in profiles) {
+                const profile = profiles[pKey];
+                const keys = keyDims[pKey] || [];
+                let dist = 0;
+
+                for (let dim of dims) {
+                    const diff = pcts[dim] - profile[dim];
+                    const weight = keys.includes(dim) ? 1.5 : 1.0;
+                    dist += weight * diff * diff;
+                }
+                dist = Math.sqrt(dist);
+
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    bestMatch = pKey;
+                }
+            }
+
+            return bestMatch;
+        }
+
+        function showResult() {
+            lastResultKey = calculateResult();
+            const resultKey = lastResultKey;
+            const result = personalities[resultKey];
+
+            // 填充头像
+            const avatarContainer = document.getElementById('resultAvatarContainer');
+            const avatarImg = document.getElementById('resultAvatar');
+            avatarContainer.classList.remove('hidden');
+            avatarImg.src = `all_images/${resultKey}.png`;
+
+            // 填充结果
+            document.getElementById('resultType').textContent = result.type;
+            document.getElementById('resultName').textContent = result.name;
+            document.getElementById('resultQuote').textContent = result.quote;
+            document.getElementById('resultDesc').textContent = result.desc;
+
+            // 渲染维度
+            const dims = ['dedication', 'social', 'competitive', 'exploration', 'action'];
+            const dimLabels = { dedication: '投入度', social: '社交性', competitive: '竞技心', exploration: '探索欲', action: '操作偏好' };
+            const maxScores = {};
+            dims.forEach(dim => {
+                maxScores[dim] = 0;
+                questions.forEach(q => {
+                    let maxForQ = 0;
+                    q.options.forEach(opt => {
+                        if (opt.score[dim] > maxForQ) maxForQ = opt.score[dim];
+                    });
+                    maxScores[dim] += maxForQ;
+                });
+            });
+
+            const dimensionsHtml = dims.map(dim => {
+                const pct = maxScores[dim] > 0 ? Math.round((scores[dim] / maxScores[dim]) * 100) : 0;
+                const level = pct >= 70 ? "极高" : pct >= 40 ? "中等" : "偏低";
+                return `
+                    <div class="dimension-item">
+                        <div class="dimension-label">${dimLabels[dim]}：${result.dimensions[dim]}</div>
+                        <div class="dimension-value">${level} (${pct}%)</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('dimensionsGrid').innerHTML = dimensionsHtml;
+
+            // 渲染推荐游戏（强制添加皇室战争）
+            const recommendedGames = [...result.games];
+            if (!recommendedGames.includes("皇室战争")) {
+                recommendedGames.push("皇室战争");
+            }
+            
+            const gamesHtml = recommendedGames.slice(0, 6).map(g => {
+                const gameInfo = allGames[g] || { tag: "推荐游戏" };
+                const firstChar = g.charAt(0);
+                const isHighlight = g === "皇室战争";
+                return `
+                    <div class="game-card ${isHighlight ? 'highlight' : ''}">
+                        <div class="game-icon"><span class="game-initial">${firstChar}</span></div>
+                        <div class="game-name">${g}</div>
+                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐必玩' : ''}</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('gamesGrid').innerHTML = gamesHtml;
+
+            showPage('resultPage');
+        }
+
+        // 通用复制函数，兼容非HTTPS环境
+        function copyTextToClipboard(text, successMsg) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(successMsg);
+                }).catch(() => {
+                    fallbackCopy(text, successMsg);
+                });
+            } else {
+                fallbackCopy(text, successMsg);
+            }
+        }
+
+        function fallbackCopy(text, successMsg) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                document.execCommand('copy');
+                alert(successMsg);
+            } catch (e) {
+                alert('复制失败，请手动复制以下内容：\n\n' + text);
+            }
+            document.body.removeChild(ta);
+        }
+
+        // 复制完整人格分析结果
+        function copyFullAnalysis() {
+            const resultName = document.getElementById('resultName').textContent;
+            const resultType = document.getElementById('resultType').textContent;
+            const resultQuote = document.getElementById('resultQuote').textContent;
+            const resultDesc = document.getElementById('resultDesc').textContent;
+            
+            // 获取推荐游戏列表
+            const gameCards = document.querySelectorAll('#gamesGrid .game-card .game-name');
+            const gamesList = Array.from(gameCards).map(g => g.textContent).join('、');
+            
+            const key = lastResultKey || 'CHILL_GAMER';
+            const shareUrl = `${window.location.origin}${window.location.pathname}?type=${key}&name=${encodeURIComponent(resultName)}`;
+            
+            const fullText = `🎮 游戏人格测试结果
+
+【${resultName}】(${resultType})
+
+💬 ${resultQuote}
+
+📝 ${resultDesc}
+
+🎮 推荐游戏：${gamesList}
+
+🔗 测测你的本命游戏：${shareUrl}`;
+
+            copyTextToClipboard(fullText, '分析结果已复制到剪贴板，快去分享给朋友吧！');
+        }
+
+        // 复制分享链接
+        function copyShareLink() {
+            const key = lastResultKey || 'CHILL_GAMER';
+            const result = personalities[key];
+            const shareUrl = `${window.location.origin}${window.location.pathname}?type=${key}&name=${encodeURIComponent(result.name)}`;
+            copyTextToClipboard(shareUrl, '分享链接已复制到剪贴板！');
+        }
+
+        // 检查URL参数，自动显示结果
+        function checkUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type');
+            const name = params.get('name');
+
+            if (type && name) {
+                // 延迟执行确保DOM已加载
+                setTimeout(() => {
+                    const result = personalities[type];
+                    if (result) {
+                        // 设置头像
+                        const avatarContainer = document.getElementById('resultAvatarContainer');
+                        const avatarImg = document.getElementById('resultAvatar');
+                        avatarContainer.classList.remove('hidden');
+                        avatarImg.src = `all_images/${type}.png`;
+
+                        // 直接显示结果页面
+                        document.getElementById('resultType').textContent = result.type;
+                        document.getElementById('resultName').textContent = result.name;
+                        document.getElementById('resultQuote').textContent = result.quote;
+                        document.getElementById('resultDesc').textContent = result.desc;
+
+                        // 计算并显示维度
+                        const dimLabels = { dedication: '投入度', social: '社交性', competitive: '竞技心', exploration: '探索欲', action: '操作偏好' };
+                        const dims = ['dedication', 'social', 'competitive', 'exploration', 'action'];
+
+                        // 使用默认分数（因为没有实际答题）
+                        const dimensionsHtml = dims.map(dim => {
+                            const level = "中等";
+                            return `
+                                <div class="dimension-item">
+                                    <div class="dimension-label">${dimLabels[dim]}：${result.dimensions[dim]}</div>
+                                    <div class="dimension-value">${level}</div>
+                                </div>
+                            `;
+                        }).join('');
+                        document.getElementById('dimensionsGrid').innerHTML = dimensionsHtml;
+
+                        // 渲染推荐游戏（强制添加皇室战争）
+                        const recommendedGames = [...result.games];
+                        if (!recommendedGames.includes("皇室战争")) {
+                            recommendedGames.push("皇室战争");
+                        }
+            const gamesHtml = recommendedGames.slice(0, 6).map(g => {
+                const gameInfo = allGames[g] || { tag: "推荐游戏" };
+                const firstChar = g.charAt(0);
+                const isHighlight = g === "皇室战争";
+                return `
+                    <div class="game-card ${isHighlight ? 'highlight' : ''}">
+                        <div class="game-icon"><span class="game-initial">${firstChar}</span></div>
+                        <div class="game-name">${g}</div>
+                        <span class="game-tag">${gameInfo.tag}${isHighlight ? ' ⭐必玩' : ''}</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('gamesGrid').innerHTML = gamesHtml;
+
+                        showPage('resultPage');
+                    }
+                }, 100);
+            }
+        }
+
+        function restartTest() {
+            showPage('welcomePage');
+        }
+
+        // 初始化像素星星背景
+        function initPixelStars() {
+            const container = document.getElementById('pixelStars');
+            if (!container) return;
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'pixel-star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        initPixelStars();
+        checkUrlParams();
+    </script>
+</body>
+</html>
