@@ -1565,13 +1565,13 @@
                 <h1 class="main-title">游戏人格测试</h1>
                 <p class="subtitle">
                     还在纠结玩什么游戏？<br>
-                    30道题帮你找到你的本命游戏！
+                    21道题帮你找到你的本命游戏！
                 </p>
             </div>
             
             <div class="tags">
                 <span class="tag">🕹️ 趣味测试</span>
-                <span class="tag">⚡ 30道题</span>
+                <span class="tag">⚡ 21道梗题</span>
                 <span class="tag">🎯 精准推荐</span>
                 <span class="tag">😂 爆笑结果</span>
             </div>
@@ -1589,7 +1589,7 @@
                 <span class="divider-line"></span>
             </div>
             
-            <p class="welcome-tip">⏱️ 预计完成时间：<span>3-5分钟</span></p>
+            <p class="welcome-tip">⏱️ 预计完成时间：<span>2-3分钟</span></p>
 
             <div class="art-motto">
                 <div class="art-motto-wrap">
@@ -1701,279 +1701,198 @@
     <script>
         // ==================== 题目数据 ====================
         const questions = [
-            // === 投入度(dedication)主维度题 - 6题 ===
+            // === 投入度(dedication) - 5题 ===
             {
                 dimension: "dedication",
-                text: "队友在团战关键时刻突然掉线，你会？",
+                text: "凌晨2点，你妈喊你睡觉，你会？",
                 options: [
-                    { text: "心态爆炸，疯狂点投降", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "默默守家，期待他重连", score: { dedication: 3, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "无所谓，一个人也能打", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 1 } }
-                ]
-            },
-            {
-                dimension: "dedication",
-                text: "游戏中的每日任务，你会？",
-                options: [
-                    { text: "必须全清，一个不落", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "选择性做，奖励好的才做", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "随缘，有空就做没空就算", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "\"马上！\"然后再战三小时", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "打完这把就睡（骗自己）", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "我早就睡了，手机不算", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "dedication",
-                text: "游戏更新了大版本，你会？",
+                text: "每日任务刷新了，你的反应是？",
                 options: [
-                    { text: "第一时间体验，肝到停不下来", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "等几天看攻略再决定怎么玩", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "什么更新？反正我afk了", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "全清！今天体力不能浪费", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "挑有奖励的做，合理摸鱼", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "任务？我只是来开心的", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "dedication",
-                text: "你的游戏时间通常？",
+                text: "游戏氪金界面弹出来，你？",
                 options: [
-                    { text: "通宵达旦，肝到天亮", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "每天固定玩几小时，有自律", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "碎片时间，蹲坑时来一把", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "648到位，钱是给爸爸花的", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "月卡走一个，理性消费人", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "白嫖到底，氪金可耻", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "dedication",
-                text: "你会因为游戏影响睡眠吗？",
+                text: "大版本更新了，你的第一反应？",
                 options: [
-                    { text: "经常通宵，明天再说", score: { dedication: 3, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "偶尔，但会设闹钟提醒", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "从不，到点就睡", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "先冲！边玩边研究，抢先体验", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "等大佬攻略出了再说", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "更新了吗？我还没登录过", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "dedication",
-                text: "你每月在游戏上的花费（时间或金钱）是？",
+                text: "卡关了三天过不去，你会？",
                 options: [
-                    { text: "能充就充，氪金使我快乐", score: { dedication: 3, social: 0, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "月卡党，理性消费", score: { dedication: 2, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "0氪金，白嫖到底", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "继续死磕！我就不信我过不了", score: { dedication: 3, social: 0, competitive: 0, exploration: 0, action: 2 } },
+                    { text: "查攻略，用最优解通关", score: { dedication: 1, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "直接换游戏，人生苦短", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
-            // === 社交性(social)主维度题 - 6题 ===
+            // === 社交性(social) - 4题 ===
             {
                 dimension: "social",
-                text: "打游戏时，你更喜欢？",
+                text: "朋友突然发消息：\"来开黑不？\"，你？",
                 options: [
-                    { text: "开黑！和朋友语音才好玩", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "看队友操作，适时发个\"干得漂亮\"", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "单排，拒绝一切社交", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
-                ]
-            },
-            {
-                dimension: "social",
-                text: "公屏有人求带，你会？",
-                options: [
-                    { text: "主动私聊：来来来，我带你", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "无视，继续自己的游戏", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "打字嘲讽：这么菜还想要人带？", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } }
+                    { text: "等我！三分钟上线！", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "今晚有事，改天吧", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "我单排，你们玩你们的", score: { dedication: 0, social: 0, competitive: 2, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "在世界频道聊天时，你通常是？",
+                text: "队友发了\"干得漂亮\"，你觉得？",
                 options: [
-                    { text: "话痨本痨，哪里都有我", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "偶尔插科打诨，活跃气氛", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "默默围观，从不发言", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "哥们是在夸我，超开心", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "嘲讽吧？我认了", score: { dedication: 0, social: 1, competitive: 2, exploration: 0, action: 0 } },
+                    { text: "不管，我在看小地图", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 1 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "游戏里有人对你示好/组CP，你会？",
+                text: "陌生人在游戏里跟你搭讪加好友，你？",
                 options: [
-                    { text: "欣然接受，甜甜的恋爱开始", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "害羞拒绝，还是当朋友吧", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "已有对象，游戏里不搞这些", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "加！说不定是新朋友", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "看情况，他是不是大佬？", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "拒绝，我不跟陌生人说话", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "加入游戏公会，你最看重的是？",
+                text: "公会要求你每天签到打卡，你？",
                 options: [
-                    { text: "活跃氛围，大家都能聊起来", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "公会实力，强力队友带我飞", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "佛系养老，不参与公会活动", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "必须到！会长对我有恩", score: { dedication: 1, social: 3, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "有空就来，佛系会员", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "我是单狼，不进公会", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
                 ]
             },
-            {
-                dimension: "social",
-                text: "游戏遇到瓶颈时，你会？",
-                options: [
-                    { text: "叫人一起组队闯关", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "在世界频道求助大佬", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "查攻略看视频，自力更生", score: { dedication: 1, social: 0, competitive: 0, exploration: 1, action: 0 } }
-                ]
-            },
-            // === 竞技心(competitive)主维度题 - 6题 ===
+            // === 竞技心(competitive) - 4题 ===
             {
                 dimension: "competitive",
-                text: "排位赛连跪10把，你会？",
+                text: "排位连跪五把，你的心理活动是？",
                 options: [
-                    { text: "砸键盘！这游戏机制有问题", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } },
-                    { text: "休息一下，明天再战", score: { dedication: 1, social: 0, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "正好掉段，可以带妹了", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "系统针对我！这把必赢！", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "休息一下，状态不好", score: { dedication: 1, social: 0, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "掉分就掉嘛，又不是世界末日", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "你的游戏目标是？",
+                text: "对手在你面前秀了一波神操作，你？",
                 options: [
-                    { text: "上王者！冲上最高段位", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 0 } },
-                    { text: "收集全图鉴，完美主义", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
-                    { text: "开心就好，输赢不重要", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "举报！绝对开挂！", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "佩服，截图存下来研究", score: { dedication: 1, social: 0, competitive: 1, exploration: 1, action: 1 } },
+                    { text: "发个666，然后继续玩", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "看到别人秀操作，你的反应是？",
+                text: "你的游戏目标是什么？",
                 options: [
-                    { text: "研究学习，下次我也要秀", score: { dedication: 1, social: 0, competitive: 2, exploration: 0, action: 1 } },
-                    { text: "发\"6\"，然后继续打游戏", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "举报！这肯定是外挂", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } }
+                    { text: "冲最强段位，不是第一我不服", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "全图鉴100%，完美主义者", score: { dedication: 2, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "开心就好，管它输赢", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "官方出了英雄削弱补丁，你会？",
+                text: "策划把你的本命英雄削弱了，你？",
                 options: [
-                    { text: "第一时间研究新版打法", score: { dedication: 1, social: 0, competitive: 2, exploration: 0, action: 1 } },
-                    { text: "骂策划，然后坚持用本命", score: { dedication: 0, social: 0, competitive: 2, exploration: 0, action: 0 } },
-                    { text: "换个英雄玩，反正都会", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
+                    { text: "去论坛开骂！策划你给我出来！", score: { dedication: 0, social: 1, competitive: 3, exploration: 0, action: 0 } },
+                    { text: "研究新版本，用新打法玩", score: { dedication: 1, social: 0, competitive: 2, exploration: 1, action: 0 } },
+                    { text: "换号吧，顺便养成新角色", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
                 ]
             },
-            {
-                dimension: "competitive",
-                text: "你更喜欢PVP还是PVE？",
-                options: [
-                    { text: "PVP！与人斗其乐无穷", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 1 } },
-                    { text: "PVE，享受剧情和挑战BOSS", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 1 } },
-                    { text: "都可以，看心情", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
-                ]
-            },
-            {
-                dimension: "competitive",
-                text: "当你的段位比朋友高时，你会？",
-                options: [
-                    { text: "带朋友上分，义不容辞", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "开小号陪朋友玩", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "各玩各的，不想被拖累", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 0 } }
-                ]
-            },
-            // === 探索欲(exploration)主维度题 - 6题 ===
+            // === 探索欲(exploration) - 4题 ===
             {
                 dimension: "exploration",
-                text: "游戏里抽卡（非酋警告），你首次十连就出了金色传说，你会？",
+                text: "十连出了金色SSR，你的第一反应？",
                 options: [
-                    { text: "截图发朋友圈，奔走相告", score: { dedication: 0, social: 1, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "假装淡定，心里乐开花", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } },
-                    { text: "继续抽，我要更多！", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } }
+                    { text: "截图！立刻发到所有群里", score: { dedication: 0, social: 2, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "继续抽，我要歪一个更好的", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "终于！攒了两个月的石头", score: { dedication: 2, social: 0, competitive: 0, exploration: 1, action: 0 } }
                 ]
             },
             {
                 dimension: "exploration",
-                text: "你更喜欢线性剧情还是开放世界？",
+                text: "Steam打折了，促销界面弹出来，你？",
                 options: [
-                    { text: "开放世界！自由探索才爽", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 0 } },
-                    { text: "线性剧情，专注叙事体验", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } },
-                    { text: "无所谓，有好玩法就行", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 1 } }
+                    { text: "先买爆！入库吃灰也值", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "加愿望单，等骨折再买", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "我手游都玩不完，不买了", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "exploration",
-                text: "游戏荒时，你会？",
+                text: "游戏里发现了一个没人知道的隐藏彩蛋，你？",
                 options: [
-                    { text: "狂刷老游戏，挖掘冷门佳作", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
-                    { text: "等新游发布，空窗期正好休息", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "转战其他娱乐，游戏只是之一", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "马上发帖！让全世界都知道！", score: { dedication: 0, social: 2, competitive: 0, exploration: 2, action: 0 } },
+                    { text: "继续探索，还有没有更多？", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "随手截个图，等以后分享", score: { dedication: 0, social: 1, competitive: 0, exploration: 1, action: 0 } }
                 ]
             },
             {
                 dimension: "exploration",
-                text: "看到游戏打折促销，你会？",
+                text: "游戏里有个无法跳过的45分钟剧情CG，你？",
                 options: [
-                    { text: "先买爆！入库吃灰没关系", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 0 } },
-                    { text: "等骨折再买，等等党永不为奴", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "只买自己会玩的，不冲动消费", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "盯着屏幕一字不漏地看完", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
+                    { text: "边看边刷手机，听着就行", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "为什么不能跳过？！差评！", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 2 } }
                 ]
             },
-            {
-                dimension: "exploration",
-                text: "游戏BUG被发现时，你会？",
-                options: [
-                    { text: "疯狂利用，报错的bug是香的", score: { dedication: 0, social: 0, competitive: 1, exploration: 2, action: 0 } },
-                    { text: "反馈官方，等待修复", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "无视它，不影响我玩就行", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
-                ]
-            },
-            {
-                dimension: "exploration",
-                text: "等待游戏加载时，你会？",
-                options: [
-                    { text: "刷攻略视频，研究技巧", score: { dedication: 1, social: 0, competitive: 0, exploration: 3, action: 0 } },
-                    { text: "刷短视频，等人齐再说", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "开小窗看剧，一举两得", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
-                ]
-            },
-            // === 操作偏好(action)主维度题 - 6题 ===
+            // === 操作偏好(action) - 4题 ===
             {
                 dimension: "action",
-                text: "你喜欢什么画风的游戏？",
+                text: "游戏里你最爱哪种操作？",
                 options: [
-                    { text: "硬核写实，真实感拉满", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 3 } },
-                    { text: "卡通可爱，萌萌哒最香", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "二次元，纸片人老婆赛高", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                    { text: "连招爆发！操作秀翻队友", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 3 } },
+                    { text: "运筹帷幄，我在布局你在送", score: { dedication: 0, social: 0, competitive: 1, exploration: 1, action: 1 } },
+                    { text: "一键操作，简单粗暴最好", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "action",
-                text: "你更倾向哪种玩法？",
+                text: "你更喜欢哪种画风？",
                 options: [
-                    { text: "策略烧脑，运筹帷幄", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 2 } },
-                    { text: "操作爽感，连招要秀", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 3 } },
-                    { text: "社交聊天，养老游戏", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "硬核写实，跟真的一样才刺激", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 3 } },
+                    { text: "二次元，纸片人老婆天下第一", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "萌系卡通，可爱就完事了", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "action",
-                text: "你的本命游戏特点是？",
+                text: "你玩游戏时会开语音吗？",
                 options: [
-                    { text: "硬核难度，虐我千百遍还爱他", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 3 } },
-                    { text: "社交属性强，玩的就是朋友", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "佛系养老，钓鱼种田", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
+                    { text: "必须开！沉默队友滚出去", score: { dedication: 0, social: 2, competitive: 2, exploration: 0, action: 1 } },
+                    { text: "只听不说，我是吃瓜群众", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "从不开，打字就够了", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "action",
-                text: "你更青睐哪种音乐/音效的游戏？",
+                text: "通关了一款超难关卡，你？",
                 options: [
-                    { text: "史诗交响乐，沉浸感拉满", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 2 } },
-                    { text: "电子嗨曲，打游戏要有节奏", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 2 } },
-                    { text: "无所谓，不影响我操作", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
-                ]
-            },
-            {
-                dimension: "action",
-                text: "如果用一种动物形容你的游戏风格，你选？",
-                options: [
-                    { text: "狼，独来独往的猎手", score: { dedication: 0, social: 0, competitive: 1, exploration: 0, action: 3 } },
-                    { text: "狐狸，狡猾又可爱", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 1 } },
-                    { text: "熊猫，憨厚佛系养生", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
-                ]
-            },
-            {
-                dimension: "action",
-                text: "你玩游戏时吃东西吗？",
-                options: [
-                    { text: "必须边玩边吃，快乐加倍", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "专心玩游戏，吃完再玩", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 2 } },
-                    { text: "不存在，我玩游戏顾不上吃", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 1 } }
+                    { text: "录屏发出去，让大家见识下", score: { dedication: 0, social: 2, competitive: 1, exploration: 0, action: 2 } },
+                    { text: "成就感爆棚，默默享受胜利", score: { dedication: 1, social: 0, competitive: 0, exploration: 0, action: 2 } },
+                    { text: "终于，可以卸载了", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 0 } }
                 ]
             }
         ];
@@ -1994,7 +1913,7 @@
                 quote: "这局我在第五层，对手在第一层。",
                 desc: "开局你就知道这局稳了。对面蹲草丛？早看穿了。队友问你怎么知道的，你说\"意识\"。其实就是脑子好使，下棋的心算水平拿来打游戏，纯纯降维打击。",
                 dimensions: { dedication: "运筹帷幄", social: "精英社交", competitive: "胜券在握", exploration: "深度研究", action: "策略流" },
-                games: ["云顶之弈", "三国志战略版", "英雄连3", "博德之门3", "文明VI", "火焰纹章：风花雪月", "明日方舟", "杀戮尖塔"]
+                games: ["云顶之弈", "三国志战略版", "永劫无间", "博德之门3", "文明VI", "金铲铲之战", "明日方舟", "杀戮尖塔"]
             },
             "SOCIAL_BUTTERFLY": {
                 type: "SQUAD-LEADER",
@@ -2002,7 +1921,7 @@
                 quote: "人不在一起，灵魂怎么在一起？",
                 desc: "单排？不可能，绝对不可能。一个人打游戏等于坐牢。你是群里的粘合剂，负责叫人、组局、活跃气氛。没有你的群早就凉了。你的游戏技术可能一般，但朋友绝对最多。",
                 dimensions: { dedication: "随叫随到", social: "社交达人", competitive: "娱乐第一", exploration: "体验分享", action: "组队型选手" },
-                games: ["蛋仔派对", "王者荣耀", "我的世界", "动物森友会", "胡闹厨房2", "人类一败涂地", "荒野乱斗", "蔚蓝"]
+                games: ["蛋仔派对", "王者荣耀", "我的世界", "动物森友会", "胡闹厨房2", "人类一败涂地", "洛克王国", "光·遇"]
             },
             "COLLECTOR": {
                 type: "COMPLETIONIST",
@@ -2010,7 +1929,7 @@
                 quote: "差一点就全图鉴了...再抽十连！",
                 desc: "别人笑你太疯癫，你笑别人看不穿。肝了三天三夜就为一个绝版道具，值吗？你说值。成就100%那一刻的快感，上班发工资都比不了。你不是在玩游戏，你是在完成一项伟大事业。",
                 dimensions: { dedication: "肝帝在线", social: "安静收集", competitive: "自娱自乐", exploration: "收集强迫症", action: "完美主义" },
-                games: ["原神", "明日方舟", "阴阳师", "闪耀暖暖", "宝可梦朱紫", "动物森友会", "以撒的结合：胎衣+", "崩坏星穹铁道"]
+                games: ["原神", "明日方舟", "阴阳师", "闪耀暖暖", "宝可梦朱紫", "动物森友会", "洛克王国", "崩坏星穹铁道"]
             },
             "CHILL_GAMER": {
                 type: "ZEN-MASTER",
@@ -2018,7 +1937,7 @@
                 quote: "输赢乃兵家常事，大侠请重新来过。",
                 desc: "队友挂机了，你帮他打。输了一整晚，你还在笑。有人骂你菜，你直接屏蔽然后继续钓鱼。你不是不认真，你只是觉得认真的人有点好笑。游戏嘛，较真就输了。",
                 dimensions: { dedication: "佛系本佛", social: "安静美男子", competitive: "无欲无求", exploration: "随缘探索", action: "养老专家" },
-                games: ["动物森友会", "星露谷物语", "我的世界", "蔚蓝", "死亡搁浅", "人类一败涂地", "控制", "以撒的结合：胎衣+"]
+                games: ["动物森友会", "星露谷物语", "我的世界", "光·遇", "洛克王国", "人类一败涂地", "跑跑卡丁车", "蛋仔派对"]
             },
             "TOXIC_GAMER": {
                 type: "KEYBOARD-WARRIOR",
@@ -2026,7 +1945,7 @@
                 quote: "干的漂亮！...我是说，对面的。",
                 desc: "打字速度130，队友菜了你比他还急。\"干得漂亮\"发出去的时候你就知道，这把又要打字解释为什么不是嘲讽了。你不是心态差，你只是太想赢了，真的。虽然赢了之后你会发现队友都被你骂跑了。",
                 dimensions: { dedication: "通宵冠军", social: "嘴强王者", competitive: "分奴无疑", exploration: "只看攻略", action: "情绪输出机" },
-                games: ["英雄联盟", "王者荣耀", "绝地求生", "CS2", "瓦罗兰特", "APEX英雄", "Dota2", "云顶之弈"]
+                games: ["英雄联盟", "王者荣耀", "绝地求生", "CS2", "瓦罗兰特", "APEX英雄", "三角洲行动", "和平精英"]
             },
             "NIGHT_OWL": {
                 type: "NIGHT-WOLF",
@@ -2034,7 +1953,7 @@
                 quote: "凌晨三点，正是游戏的好时候。",
                 desc: "白天你不是不想玩，是网不好、人太多、键盘不跟手。只有凌晨三点，队友睡了，对手也睡了，你才真正进入状态。恭喜你发现了游戏的正确打开方式。白天用来生存，凌晨用来生活。",
                 dimensions: { dedication: "夜猫子本猫", social: "独狼夜行", competitive: "暗中博弈", exploration: "深夜探索", action: "神秘刺客" },
-                games: ["CS2", "绝地求生", "英雄联盟", "Dota2", "瓦罗兰特", "哈迪斯", "死亡细胞", "杀戮尖塔"]
+                games: ["CS2", "绝地求生", "英雄联盟", "Dota2", "瓦罗兰特", "三角洲行动", "和平精英", "永劫无间"]
             },
             "CASUAL_CUTE": {
                 type: "CUTE-ADDICT",
@@ -2050,7 +1969,7 @@
                 quote: "死了？正常，这游戏第一次过不算通关。",
                 desc: "简单模式？不存在。困难模式？热身而已。你享受卡关两小时通关十秒的快感，那一刻的成就感比中彩票还爽。别人骂策划的时候你在研究机制，别人退游的时候你在二周目。",
                 dimensions: { dedication: "硬核投入", social: "孤独战士", competitive: "超越自我", exploration: "研究机制", action: "抖M体质" },
-                games: ["艾尔登法环", "黑暗之魂3", "只狼", "茶杯头", "空洞骑士", "蔚蓝", "哈迪斯", "卧龙：苍天陨落"]
+                games: ["艾尔登法环", "黑暗之魂3", "只狼", "茶杯头", "空洞骑士", "蔚蓝", "永劫无间", "卧龙：苍天陨落"]
             },
             "GUILD_LEADER": {
                 type: "GUILD-LEADER",
@@ -2058,7 +1977,7 @@
                 quote: "跟着我冲，赢了算你们的，输了算我的。",
                 desc: "你可能不是公会里最厉害的，但绝对是最能说的那个。开会你主持，打本你指挥，群里冷场你救场。你把公会当成另一个家，虽然这个家有时候会让你血压升高。但看到会员喊\"会长威武\"，一切都值了。",
                 dimensions: { dedication: "全勤标兵", social: "一呼百应", competitive: "团队荣耀", exploration: "统筹规划", action: "社交指挥官" },
-                games: ["魔兽世界", "最终幻想XIV", "王者荣耀", "部落冲突", "命运方舟", "原神", "三国志战略版", "皇室战争"]
+                games: ["魔兽世界", "逆水寒手游", "王者荣耀", "部落冲突", "射雕", "原神", "三国志战略版", "皇室战争"]
             },
             "MOBILE_MASTER": {
                 type: "HANDHELD-KING",
@@ -2066,7 +1985,7 @@
                 quote: "谁说手机不能打职业？我就是行走的传说。",
                 desc: "什么？要用电脑打游戏？那多麻烦。手机掏出来就能玩，蹲厕所、挤地铁、午休时...这些都是你的游戏时间。你是手游王者，段位可能比很多PC玩家都高。便携即正义，你就是行走的电竞馆。",
                 dimensions: { dedication: "碎片大师", social: "随时组队", competitive: "轻度竞技", exploration: "快速体验", action: "手机宗师" },
-                games: ["荒野乱斗", "王者荣耀", "蛋仔派对", "部落冲突", "皇室战争", "原神", "明日方舟", "崩坏星穹铁道"]
+                games: ["荒野乱斗", "王者荣耀", "蛋仔派对", "部落冲突", "和平精英", "三角洲行动", "金铲铲之战", "跑跑卡丁车"]
             },
             "STORY_LOVER": {
                 type: "NARRATIVE-FAN",
@@ -2074,7 +1993,7 @@
                 quote: "等等，这段对话我要听完再打怪。",
                 desc: "战斗？等下再说。这个NPC的故事我还没听完。别人速通花了两小时，你第一章剧情看了五小时。不是你慢，是你真的在体验游戏。隔壁老王问你游戏通关了吗，你说\"我在第48章\"。",
                 dimensions: { dedication: "沉浸体验", social: "安静欣赏", competitive: "无视胜负", exploration: "叙事鉴赏家", action: "剧情优先" },
-                games: ["巫师3", "极乐迪斯科", "女神异闻录5皇家版", "博德之门3", "最终幻想XVI", "最终幻想VII重制版", "崩坏星穹铁道", "勇者斗恶龙XI"]
+                games: ["巫师3", "女神异闻录5皇家版", "博德之门3", "最终幻想XVI", "最终幻想VII重制版", "崩坏星穹铁道", "逆水寒手游", "射雕"]
             },
             "OPEN_WORLD": {
                 type: "ADVENTURER",
@@ -2082,7 +2001,7 @@
                 quote: "主线？先不急，我要去爬一下那座山。",
                 desc: "别人说你迷路，你说你叫探索。开局给你一张大地图，你能在新手村玩到账号被找回。什么主线任务？不存在的。你的人生哲学是：风景都在路上，重点不是终点，是沿途的每一块可以爬的石头。",
                 dimensions: { dedication: "自由散漫", social: "独行侠", competitive: "不争输赢", exploration: "探索至上", action: "风景党" },
-                games: ["塞尔达传说：王国之泪", "艾尔登法环", "巫师3", "霍格沃茨之遗", "博德之门3", "地平线西之绝境", "对马岛之魂", "原神"]
+                games: ["塞尔达传说：王国之泪", "艾尔登法环", "巫师3", "霍格沃茨之遗", "博德之门3", "原神", "逆水寒手游", "射雕"]
             },
             "GACHA_MASTER": {
                 type: "GACHA-ADDICT",
@@ -2096,27 +2015,41 @@
 
         // ==================== 游戏推荐池 ====================
         const allGames = {
-            // ===== 手游 =====
+            // ===== 手游 热门 =====
             "皇室战争": { tag: "宇宙最好玩的游戏", score: 100, platforms: "手游", genre: "策略竞技" },
-            "荒野乱斗": { tag: "快节奏竞技", score: 88, platforms: "手游", genre: "动作竞技" },
-            "部落冲突": { tag: "策略养成鼻祖", score: 87, platforms: "手游", genre: "策略" },
             "王者荣耀": { tag: "国民MOBA", score: 89, platforms: "手游", genre: "MOBA" },
-            "蛋仔派对": { tag: "派对休闲", score: 85, platforms: "手游", genre: "派对" },
+            "和平精英": { tag: "国民吃鸡", score: 88, platforms: "手游", genre: "大逃杀" },
             "原神": { tag: "开放世界手游标杆", score: 92, platforms: "手游/PC", genre: "开放世界RPG" },
             "崩坏星穹铁道": { tag: "回合制RPG精品", score: 91, platforms: "手游/PC", genre: "回合制RPG" },
             "明日方舟": { tag: "硬核塔防", score: 90, platforms: "手游/PC", genre: "策略塔防" },
+            "三角洲行动": { tag: "国产硬核射击", score: 87, platforms: "手游/PC", genre: "战术射击" },
+            "金铲铲之战": { tag: "自走棋手游版", score: 86, platforms: "手游", genre: "自走棋" },
+            "荒野乱斗": { tag: "快节奏竞技", score: 88, platforms: "手游", genre: "动作竞技" },
+            "蛋仔派对": { tag: "派对休闲", score: 85, platforms: "手游", genre: "派对" },
+            "光·遇": { tag: "治愈云游戏", score: 89, platforms: "手游/PC", genre: "社交冒险" },
+            "洛克王国": { tag: "童年回忆杀", score: 82, platforms: "PC/手游", genre: "社交养成" },
+            "跑跑卡丁车": { tag: "竞速经典复活", score: 84, platforms: "PC/手游", genre: "竞速" },
+            "逆水寒手游": { tag: "国风武侠MMO", score: 88, platforms: "手游", genre: "MMORPG" },
+            "射雕": { tag: "武侠开放世界", score: 85, platforms: "手游/PC", genre: "开放世界" },
             "恋与深空": { tag: "次世代恋爱", score: 86, platforms: "手游", genre: "3D恋爱" },
-            "未定事件簿": { tag: "推理恋爱", score: 84, platforms: "手游", genre: "悬疑恋爱" },
             "闪耀暖暖": { tag: "时尚换装", score: 85, platforms: "手游", genre: "换装养成" },
-            "公主连结": { tag: "番剧品质", score: 86, platforms: "手游", genre: "JRPG" },
             "阴阳师": { tag: "东方幻想", score: 84, platforms: "手游/PC", genre: "回合制" },
             "三国志战略版": { tag: "深度SLG", score: 88, platforms: "手游", genre: "策略" },
+            "部落冲突": { tag: "策略养成鼻祖", score: 87, platforms: "手游", genre: "策略" },
+            // ===== PC端网游 =====
+            "英雄联盟": { tag: "MOBA统治者", score: 90, platforms: "PC", genre: "MOBA" },
+            "CS2": { tag: "射击竞技经典", score: 90, platforms: "PC", genre: "战术射击" },
+            "永劫无间": { tag: "国产动作网游", score: 88, platforms: "PC/手游", genre: "动作竞技" },
+            "云顶之弈": { tag: "自走棋进化形态", score: 87, platforms: "PC/手游", genre: "自走棋" },
+            "Dota2": { tag: "MOBA深度之王", score: 91, platforms: "PC", genre: "MOBA" },
+            "绝地求生": { tag: "大逃杀开创者", score: 86, platforms: "PC", genre: "大逃杀" },
+            "魔兽世界": { tag: "MMORPG永远的神", score: 93, platforms: "PC", genre: "MMORPG" },
             // ===== 动作/魂系 =====
             "艾尔登法环": { tag: "开放世界魂系巅峰", score: 96, platforms: "PC/主机", genre: "动作RPG" },
             "只狼": { tag: "剑道美学极致", score: 95, platforms: "PC/主机", genre: "动作" },
             "黑暗之魂3": { tag: "魂系集大成者", score: 94, platforms: "PC/主机", genre: "动作RPG" },
             "茶杯头": { tag: "硬核艺术佳作", score: 93, platforms: "PC/主机", genre: "平台动作" },
-            "空洞骑士": { tag: "独立魂类神作", score: 95, platforms: "PC/主机/手游", genre: "动作" },
+            "空洞骑士": { tag: "独立魂类神作", score: 95, platforms: "全平台", genre: "动作" },
             "哈迪斯": { tag: "Rogue-like革命者", score: 95, platforms: "PC/主机", genre: "Roguelite" },
             "卧龙：苍天陨落": { tag: "三国魂系", score: 87, platforms: "PC/主机", genre: "动作" },
             "街霸VI": { tag: "格斗游戏复兴之作", score: 92, platforms: "PC/主机", genre: "格斗" },
@@ -2126,24 +2059,9 @@
             "女神异闻录5皇家版": { tag: "JRPG封神之作", score: 95, platforms: "PC/主机", genre: "JRPG" },
             "最终幻想XVI": { tag: "FF系列新纪元", score: 88, platforms: "PC/主机", genre: "动作RPG" },
             "最终幻想VII重制版": { tag: "经典重生", score: 90, platforms: "PC/主机", genre: "动作RPG" },
-            "极乐迪斯科": { tag: "叙事神作", score: 97, platforms: "PC", genre: "CRPG" },
-            "火焰纹章：风花雪月": { tag: "策略RPG杰作", score: 90, platforms: "Switch", genre: "策略RPG" },
-            "勇者斗恶龙XI": { tag: "JRPG经典之作", score: 91, platforms: "PC/主机", genre: "JRPG" },
-            "控制": { tag: "新奇叙事体验", score: 88, platforms: "PC/主机", genre: "动作冒险" },
             // ===== 开放世界/冒险 =====
             "塞尔达传说：王国之泪": { tag: "开放世界天花板", score: 96, platforms: "Switch", genre: "动作冒险" },
             "霍格沃茨之遗": { tag: "魔法世界梦想成真", score: 85, platforms: "PC/主机", genre: "开放世界" },
-            "地平线西之绝境": { tag: "视觉震撼大作", score: 89, platforms: "PC/主机", genre: "开放世界" },
-            "对马岛之魂": { tag: "武士美学佳作", score: 88, platforms: "PC/主机", genre: "动作冒险" },
-            "死亡搁浅": { tag: "步行模拟哲学", score: 82, platforms: "PC/主机", genre: "动作" },
-            // ===== 射击/竞技 =====
-            "CS2": { tag: "射击竞技经典", score: 90, platforms: "PC", genre: "战术射击" },
-            "APEX英雄": { tag: "战术竞技精品", score: 91, platforms: "PC/主机", genre: "战术竞技" },
-            "瓦罗兰特": { tag: "战术射击新标杆", score: 90, platforms: "PC", genre: "战术射击" },
-            "英雄联盟": { tag: "MOBA统治者", score: 90, platforms: "PC", genre: "MOBA" },
-            "Dota2": { tag: "MOBA深度之王", score: 91, platforms: "PC", genre: "MOBA" },
-            "绝地求生": { tag: "大逃杀开创者", score: 86, platforms: "PC", genre: "大逃杀" },
-            "云顶之弈": { tag: "自走棋进化形态", score: 87, platforms: "PC/手游", genre: "自走棋" },
             // ===== 独立游戏 =====
             "星露谷物语": { tag: "像素田园治愈", score: 95, platforms: "全平台", genre: "农场模拟" },
             "我的世界": { tag: "创造力无限", score: 93, platforms: "全平台", genre: "沙盒" },
@@ -2151,20 +2069,16 @@
             "杀戮尖塔": { tag: "卡牌Rogue鼻祖", score: 93, platforms: "全平台", genre: "Roguelike" },
             "死亡细胞": { tag: "动作肉鸽精品", score: 92, platforms: "全平台", genre: "Roguelite" },
             "蔚蓝": { tag: "平台跳跃与心理疗愈", score: 94, platforms: "PC/主机", genre: "平台" },
-            "以撒的结合：胎衣+": { tag: "Rogue地牢传奇", score: 95, platforms: "PC/主机", genre: "Roguelike" },
             "胡闹厨房2": { tag: "友谊粉碎机", score: 87, platforms: "全平台", genre: "派对" },
             "人类一败涂地": { tag: "物理派对欢乐王", score: 85, platforms: "全平台", genre: "派对" },
-            // ===== 策略/模拟 =====
+            // ===== 策略 =====
             "文明VI": { tag: "回合策略教科书", score: 92, platforms: "PC/主机", genre: "回合策略" },
-            "博德之门3": { tag: "RPG策略融合极品", score: 97, platforms: "PC/主机", genre: "CRPG" },
-            "英雄连3": { tag: "即时战略精髓", score: 87, platforms: "PC", genre: "RTS" },
-            "三国志战略版": { tag: "国产SLG标杆", score: 88, platforms: "手游", genre: "策略" },
-            // ===== MMORPG =====
-            "魔兽世界": { tag: "MMORPG永远的神", score: 93, platforms: "PC", genre: "MMORPG" },
-            "最终幻想XIV": { tag: "剧情最佳MMO", score: 91, platforms: "PC/主机", genre: "MMORPG" },
-            "命运方舟": { tag: "动作MMO精品", score: 86, platforms: "PC", genre: "MMORPG" },
             // ===== 其他 =====
+            "未定事件簿": { tag: "推理恋爱", score: 84, platforms: "手游", genre: "悬疑恋爱" },
+            "公主连结": { tag: "番剧品质", score: 86, platforms: "手游", genre: "JRPG" },
             "宝可梦朱紫": { tag: "收集养成国民游戏", score: 73, platforms: "Switch", genre: "RPG" },
+            "APEX英雄": { tag: "战术竞技精品", score: 91, platforms: "PC/主机", genre: "战术竞技" },
+            "瓦罗兰特": { tag: "战术射击新标杆", score: 90, platforms: "PC", genre: "战术射击" },
         };
 
         // ==================== 测试状态 ====================
