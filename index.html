@@ -2099,10 +2099,10 @@
                 games: ["皇室战争"]
             },
             "STRATEGIST": {
-                type: "黄金骑士",
-                name: "Golden Knight · 战场谋主",
-                quote: "我落刀的地方，就是你该倒下的地方。",
-                desc: "你是皇室战场上的黄金骑士——冠军卡中的运筹者。别人拼的是圣水，你拼的是节奏。一个反向冲锋技能，硬生生把劣势局盘活成绝地翻盘。对手以为你慌了，你其实已经算好了下五步。你不是在打牌，你是在下棋。",
+                type: "飞龙宝宝",
+                name: "Baby Dragon · 空中谋略家",
+                quote: "站得高看得远，你们地上打架我在天上看全局。",
+                desc: "你是皇室战场上的飞龙宝宝——4费史诗空中单位，俯瞰全场，一口龙息烧遍战线。别人在地面纠缠，你在云层之上运筹帷幄。范围伤害清场小兵，空中优势无人可敌。对手以为你只是个宝宝，殊不知你早已把战局看了三遍。飞龙宝宝不需要长大，因为智慧从来不看体型。",
                 dimensions: { dedication: "运筹帷幄", social: "精英社交", competitive: "胜券在握", exploration: "深度研究", action: "策略流" },
                 games: ["皇室战争"]
             },
@@ -2222,72 +2222,9 @@
             "GACHA_MASTER": "卡牌/电磁炮 26000033.png"
         };
 
-        // ==================== 游戏推荐池 ====================
+        // ==================== 游戏推荐池（唯一推荐：皇室战争）====================
         const allGames = {
-            // ===== 手游 热门 =====
-            "皇室战争": { tag: "宇宙最好玩的游戏", score: 100, platforms: "手游", genre: "策略竞技" },
-            "王者荣耀": { tag: "国民MOBA", score: 89, platforms: "手游", genre: "MOBA" },
-            "和平精英": { tag: "国民吃鸡", score: 88, platforms: "手游", genre: "大逃杀" },
-            "原神": { tag: "开放世界手游标杆", score: 92, platforms: "手游/PC", genre: "开放世界RPG" },
-            "崩坏星穹铁道": { tag: "回合制RPG精品", score: 91, platforms: "手游/PC", genre: "回合制RPG" },
-            "明日方舟": { tag: "硬核塔防", score: 90, platforms: "手游/PC", genre: "策略塔防" },
-            "三角洲行动": { tag: "国产硬核射击", score: 87, platforms: "手游/PC", genre: "战术射击" },
-            "金铲铲之战": { tag: "自走棋手游版", score: 86, platforms: "手游", genre: "自走棋" },
-            "荒野乱斗": { tag: "快节奏竞技", score: 88, platforms: "手游", genre: "动作竞技" },
-            "蛋仔派对": { tag: "派对休闲", score: 85, platforms: "手游", genre: "派对" },
-            "光·遇": { tag: "治愈云游戏", score: 89, platforms: "手游/PC", genre: "社交冒险" },
-            "洛克王国": { tag: "童年回忆杀", score: 82, platforms: "PC/手游", genre: "社交养成" },
-            "跑跑卡丁车": { tag: "竞速经典复活", score: 84, platforms: "PC/手游", genre: "竞速" },
-            "逆水寒手游": { tag: "国风武侠MMO", score: 88, platforms: "手游", genre: "MMORPG" },
-            "射雕": { tag: "武侠开放世界", score: 85, platforms: "手游/PC", genre: "开放世界" },
-            "恋与深空": { tag: "次世代恋爱", score: 86, platforms: "手游", genre: "3D恋爱" },
-            "闪耀暖暖": { tag: "时尚换装", score: 85, platforms: "手游", genre: "换装养成" },
-            "阴阳师": { tag: "东方幻想", score: 84, platforms: "手游/PC", genre: "回合制" },
-            "三国志战略版": { tag: "深度SLG", score: 88, platforms: "手游", genre: "策略" },
-            "部落冲突": { tag: "策略养成鼻祖", score: 87, platforms: "手游", genre: "策略" },
-            // ===== PC端网游 =====
-            "英雄联盟": { tag: "MOBA统治者", score: 90, platforms: "PC", genre: "MOBA" },
-            "CS2": { tag: "射击竞技经典", score: 90, platforms: "PC", genre: "战术射击" },
-            "永劫无间": { tag: "国产动作网游", score: 88, platforms: "PC/手游", genre: "动作竞技" },
-            "云顶之弈": { tag: "自走棋进化形态", score: 87, platforms: "PC/手游", genre: "自走棋" },
-            "Dota2": { tag: "MOBA深度之王", score: 91, platforms: "PC", genre: "MOBA" },
-            "绝地求生": { tag: "大逃杀开创者", score: 86, platforms: "PC", genre: "大逃杀" },
-            "魔兽世界": { tag: "MMORPG永远的神", score: 93, platforms: "PC", genre: "MMORPG" },
-            // ===== 动作/魂系 =====
-            "艾尔登法环": { tag: "开放世界魂系巅峰", score: 96, platforms: "PC/主机", genre: "动作RPG" },
-            "只狼": { tag: "剑道美学极致", score: 95, platforms: "PC/主机", genre: "动作" },
-            "黑暗之魂3": { tag: "魂系集大成者", score: 94, platforms: "PC/主机", genre: "动作RPG" },
-            "茶杯头": { tag: "硬核艺术佳作", score: 93, platforms: "PC/主机", genre: "平台动作" },
-            "空洞骑士": { tag: "独立魂类神作", score: 95, platforms: "全平台", genre: "动作" },
-            "哈迪斯": { tag: "Rogue-like革命者", score: 95, platforms: "PC/主机", genre: "Roguelite" },
-            "卧龙：苍天陨落": { tag: "三国魂系", score: 87, platforms: "PC/主机", genre: "动作" },
-            "街霸VI": { tag: "格斗游戏复兴之作", score: 92, platforms: "PC/主机", genre: "格斗" },
-            // ===== RPG/叙事 =====
-            "巫师3": { tag: "开放世界RPG神作", score: 97, platforms: "PC/主机", genre: "开放世界RPG" },
-            "博德之门3": { tag: "CRPG世代之作", score: 97, platforms: "PC/主机", genre: "CRPG" },
-            "女神异闻录5皇家版": { tag: "JRPG封神之作", score: 95, platforms: "PC/主机", genre: "JRPG" },
-            "最终幻想XVI": { tag: "FF系列新纪元", score: 88, platforms: "PC/主机", genre: "动作RPG" },
-            "最终幻想VII重制版": { tag: "经典重生", score: 90, platforms: "PC/主机", genre: "动作RPG" },
-            // ===== 开放世界/冒险 =====
-            "塞尔达传说：王国之泪": { tag: "开放世界天花板", score: 96, platforms: "Switch", genre: "动作冒险" },
-            "霍格沃茨之遗": { tag: "魔法世界梦想成真", score: 85, platforms: "PC/主机", genre: "开放世界" },
-            // ===== 独立游戏 =====
-            "星露谷物语": { tag: "像素田园治愈", score: 95, platforms: "全平台", genre: "农场模拟" },
-            "我的世界": { tag: "创造力无限", score: 93, platforms: "全平台", genre: "沙盒" },
-            "动物森友会": { tag: "岛屿生活治愈系", score: 90, platforms: "Switch", genre: "生活模拟" },
-            "杀戮尖塔": { tag: "卡牌Rogue鼻祖", score: 93, platforms: "全平台", genre: "Roguelike" },
-            "死亡细胞": { tag: "动作肉鸽精品", score: 92, platforms: "全平台", genre: "Roguelite" },
-            "蔚蓝": { tag: "平台跳跃与心理疗愈", score: 94, platforms: "PC/主机", genre: "平台" },
-            "胡闹厨房2": { tag: "友谊粉碎机", score: 87, platforms: "全平台", genre: "派对" },
-            "人类一败涂地": { tag: "物理派对欢乐王", score: 85, platforms: "全平台", genre: "派对" },
-            // ===== 策略 =====
-            "文明VI": { tag: "回合策略教科书", score: 92, platforms: "PC/主机", genre: "回合策略" },
-            // ===== 其他 =====
-            "未定事件簿": { tag: "推理恋爱", score: 84, platforms: "手游", genre: "悬疑恋爱" },
-            "公主连结": { tag: "番剧品质", score: 86, platforms: "手游", genre: "JRPG" },
-            "宝可梦朱紫": { tag: "收集养成国民游戏", score: 73, platforms: "Switch", genre: "RPG" },
-            "APEX英雄": { tag: "战术竞技精品", score: 91, platforms: "PC/主机", genre: "战术竞技" },
-            "瓦罗兰特": { tag: "战术射击新标杆", score: 90, platforms: "PC", genre: "战术射击" },
+            "皇室战争": { tag: "宇宙最好玩的游戏", score: 100, platforms: "手游", genre: "策略竞技" }
         };
 
         // ==================== 测试状态 ====================
