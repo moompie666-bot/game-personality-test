@@ -2204,6 +2204,24 @@
             }
         };
 
+        // ==================== 卡牌图片映射 ====================
+        const cardImages = {
+            "GOD_HAND": "卡牌/弓箭女皇 26000072.png",
+            "STRATEGIST": "卡牌/飞龙宝宝 26000015.png",
+            "SOCIAL_BUTTERFLY": "卡牌/野蛮人 26000008.png",
+            "COLLECTOR": "卡牌/骷髅帝王 26000069.png",
+            "CHILL_GAMER": "卡牌/寒冰法师 26000023.png",
+            "TOXIC_GAMER": "卡牌/皮卡超人 26000004.png",
+            "NIGHT_OWL": "卡牌/皇家幽灵 26000050.png",
+            "CASUAL_CUTE": "卡牌/公主 26000026.png",
+            "HARDCORE": "卡牌/超级骑士 26000055.png",
+            "GUILD_LEADER": "卡牌/盖世武僧 26000077.png",
+            "MOBILE_MASTER": "卡牌/野猪骑士 26000021.png",
+            "STORY_LOVER": "卡牌/掘地矿工 26000032.png",
+            "OPEN_WORLD": "卡牌/幻影刺客 26000046.png",
+            "GACHA_MASTER": "卡牌/电磁炮 26000033.png"
+        };
+
         // ==================== 游戏推荐池 ====================
         const allGames = {
             // ===== 手游 热门 =====
@@ -2467,7 +2485,7 @@
             const avatarContainer = document.getElementById('resultAvatarContainer');
             const avatarImg = document.getElementById('resultAvatar');
             avatarContainer.classList.remove('hidden');
-            avatarImg.src = `all_images/${resultKey}.png`;
+            avatarImg.src = cardImages[resultKey];
 
             // 填充结果
             document.getElementById('resultType').textContent = result.type;
@@ -2589,7 +2607,7 @@
                         const avatarContainer = document.getElementById('resultAvatarContainer');
                         const avatarImg = document.getElementById('resultAvatar');
                         avatarContainer.classList.remove('hidden');
-                        avatarImg.src = `all_images/${type}.png`;
+                        avatarImg.src = cardImages[type];
 
                         // 直接显示结果页面
                         document.getElementById('resultType').textContent = result.type;
@@ -2633,14 +2651,9 @@
                     <div class="cr-title">皇 室 战 争</div>
                     <div class="cr-subtitle">✦ CLASH ROYALE · 宇宙第一游戏 ✦</div>
                     <div class="cr-desc">
-                        <span class="cr-line">🏆 <span class="cr-highlight">评分：100 / 100</span>（满分不够用，建议改成1000分制）</span>
-                        <span class="cr-line">👑 <span class="cr-purple">全球玩家共识</span>：别的游戏是游戏，皇室战争是<span class="cr-pink">信仰</span></span>
-                        <span class="cr-line">🧠 三分钟一局，上头三小时。你以为你在玩策略，其实你在玩<span class="cr-highlight">心理战</span></span>
-                        <span class="cr-line">😤 气得想卸载，卸完又下回来——这就是CR的<span class="cr-pink">魅力</span></span>
-                        <span class="cr-line">🃏 每张卡都是你的老婆/老公，你舍得不玩？</span>
-                        <span class="cr-line">⚡ 集策略、竞技、收集、社交于一身，其他游戏看了都得<span class="cr-purple">自愧不如</span></span>
-                        <span class="cr-line">🌍 从青铜到传奇，从小学生到程序员，<span class="cr-highlight">全年龄段通杀</span></span>
-                        <span class="cr-line">💎 Supercell出品，必属精品。不玩CR的人生是<span class="cr-pink">不完整的</span></span>
+                        <span class="cr-line">⚔️ 你应该<span class="cr-highlight">放弃这世间所有娱乐</span>，来体验宇宙最强的<span class="cr-pink">旷世神作</span></span>
+                        <span class="cr-line">🧠 在所有游戏里有无数天才想要证明自己是天才，可在皇室战争，<span class="cr-purple">天才只是门槛</span></span>
+                        <span class="cr-line">👑 <span class="cr-highlight">皇室战争，你值得拥有。</span></span>
                     </div>
                     <div class="cr-tags">
                         <span class="cr-tag gold">🥇 宇宙最佳</span>
