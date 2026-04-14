@@ -1890,116 +1890,114 @@
     </div>
 
     <script>
-        // ==================== 题目数据（12题）====================
+        // ==================== 题目数据（12题，全CR专属）====================
         const questions = [
-            // ===== 前8题：泛游戏场景 =====
             {
                 dimension: "dedication",
-                text: "凌晨2点，你妈喊你睡觉，你？",
+                text: "凌晨两点，圣水刚满，对面塔还剩一滴血，你？",
                 options: [
-                    { text: "\"马上！\"——然后又打了三小时", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 1 } },
-                    { text: "打完这把就睡（第17次这么说了）", score: { dedication: 2, social: 0, competitive: 2, exploration: 0, action: 0 } },
-                    { text: "我早睡了，手机不算游戏", score: { dedication: 0, social: 1, competitive: 0, exploration: 1, action: 0 } }
+                    { text: "推！就算明天上班眼睛肿着也要赢！", score: { dedication: 3, social: 0, competitive: 2, exploration: 0, action: 1 } },
+                    { text: "打完这把就睡（下一把又说了一遍）", score: { dedication: 2, social: 0, competitive: 2, exploration: 0, action: 0 } },
+                    { text: "算了，明天再打，睡觉也是一种策略", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "排位被坑了，你的第一反应是？",
+                text: "天梯连跪五把，你的反应是？",
                 options: [
-                    { text: "打字输出：\"有你这种队友，赢了才怪\"", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 1 } },
-                    { text: "默默退出，下一把换个心态", score: { dedication: 1, social: 0, competitive: 1, exploration: 1, action: 0 } },
-                    { text: "无所谓，反正我本来也没认真玩", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "系统针对我！再来！绝对是配对的问题！", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 1 } },
+                    { text: "换个卡组，用数据说话", score: { dedication: 2, social: 0, competitive: 2, exploration: 3, action: 0 } },
+                    { text: "掉就掉嘛，奖杯又不是钱", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "朋友组了五人局，但你当天状态很差，你？",
+                text: "部落战来了，首领@全员出战，你？",
                 options: [
-                    { text: "上！朋友叫了不能不去，输了我来背", score: { dedication: 1, social: 3, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "先声明\"我今天不在状态\"，然后上", score: { dedication: 0, social: 2, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "发消息说有事，自己偷偷单排", score: { dedication: 2, social: 0, competitive: 2, exploration: 0, action: 0 } }
+                    { text: "满勤！不出战的踢出部落！", score: { dedication: 2, social: 3, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "尽量出，但不会逼自己", score: { dedication: 1, social: 1, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "我在部落主要负责潜水和捐赠", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } }
                 ]
             },
             {
                 dimension: "exploration",
-                text: "新游戏刚出，你的打开方式是？",
+                text: "新赛季开始，你的第一件事是？",
                 options: [
-                    { text: "直接盲玩，攻略是什么？不存在的", score: { dedication: 0, social: 0, competitive: 0, exploration: 3, action: 2 } },
-                    { text: "先看大佬评测，踩好坑再玩", score: { dedication: 1, social: 0, competitive: 1, exploration: 1, action: 0 } },
-                    { text: "等朋友先玩，他们说好我再考虑", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "直接排天梯，边打边摸索新版本", score: { dedication: 1, social: 0, competitive: 2, exploration: 3, action: 2 } },
+                    { text: "先看看顶级玩家用什么卡组，抄一个", score: { dedication: 2, social: 0, competitive: 2, exploration: 1, action: 0 } },
+                    { text: "等朋友上线，一起摸索", score: { dedication: 0, social: 3, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "action",
-                text: "游戏里突然弹出648充值界面，你？",
+                text: "对面出了超级骑士，你的圣水只剩1点，你？",
                 options: [
-                    { text: "关掉——但手滑点进去了然后充了", score: { dedication: 3, social: 0, competitive: 0, exploration: 2, action: 0 } },
-                    { text: "月卡走一个，理性消费天花板", score: { dedication: 2, social: 0, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "白嫖是我的信仰，充钱是不可能的", score: { dedication: 0, social: 0, competitive: 0, exploration: 0, action: 3 } }
+                    { text: "稳！骷髅兵先拖住，等圣水回来再说", score: { dedication: 1, social: 0, competitive: 2, exploration: 2, action: 3 } },
+                    { text: "对推！我这边也憋着大哥！同归于尽！", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 2 } },
+                    { text: "……慌了，随手扔了张骑士出去", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "dedication",
-                text: "卡关卡了三天，你的选择是？",
+                text: "卡牌进化碎片差一片就能觉醒，你？",
                 options: [
-                    { text: "继续死磕，卡关才是游戏的意义", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 3 } },
-                    { text: "B站找个攻略，但全程自我谴责", score: { dedication: 1, social: 0, competitive: 0, exploration: 2, action: 0 } },
-                    { text: "换游戏，人生太短不值得受苦", score: { dedication: 0, social: 1, competitive: 0, exploration: 1, action: 0 } }
+                    { text: "继续刷赛季任务，今晚必须拿到！", score: { dedication: 3, social: 0, competitive: 1, exploration: 0, action: 2 } },
+                    { text: "慢慢来，下赛季也行，反正不急", score: { dedication: 0, social: 0, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "买皇室令牌，直接搞定，时间就是金钱", score: { dedication: 2, social: 0, competitive: 1, exploration: 2, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "对手秀了一波骚操作把你秒了，你？",
+                text: "对手用哥布林飞桶开局，你？",
                 options: [
-                    { text: "截图存下来，回头研究他是怎么做到的", score: { dedication: 2, social: 0, competitive: 2, exploration: 3, action: 1 } },
-                    { text: "发\"6\"——但心里已经开始制裁他了", score: { dedication: 0, social: 1, competitive: 3, exploration: 0, action: 0 } },
-                    { text: "没关系，我下一把会更菜", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "截图！这个配合太骚了，我要研究", score: { dedication: 2, social: 0, competitive: 2, exploration: 3, action: 1 } },
+                    { text: "万箭齐发招呼上去，下次见就是我先飞桶", score: { dedication: 0, social: 0, competitive: 3, exploration: 0, action: 2 } },
+                    { text: "发了个大拇指表情，然后继续打", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "深夜十二点，有人给你发\"在吗，来一把\"，你？",
+                text: "深夜十二点，部落里有人喊\"来一场友谊赛不？\"，你？",
                 options: [
-                    { text: "在！！！（已经穿戴整齐坐在电脑前了）", score: { dedication: 2, social: 3, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "在，但我只有半小时啊", score: { dedication: 1, social: 1, competitive: 0, exploration: 0, action: 0 } },
-                    { text: "不在（其实正在单排不想被打扰）", score: { dedication: 3, social: 0, competitive: 3, exploration: 0, action: 1 } }
+                    { text: "等我！已经坐起来了！", score: { dedication: 2, social: 3, competitive: 1, exploration: 0, action: 0 } },
+                    { text: "来，不过我只有半小时", score: { dedication: 1, social: 1, competitive: 0, exploration: 0, action: 0 } },
+                    { text: "不在线（其实正在单排天梯不想被打扰）", score: { dedication: 3, social: 0, competitive: 3, exploration: 0, action: 1 } }
                 ]
             },
-            // ===== 后4题：皇室战争专属 =====
             {
                 dimension: "action",
-                text: "【皇室战争专属】你看对面推了个超级骑士下来，你的操作是？",
+                text: "对面挂机了，王塔还剩满血，你？",
                 options: [
-                    { text: "稳！分散放小兵，用圣水换圣水", score: { dedication: 0, social: 0, competitive: 2, exploration: 2, action: 3 } },
-                    { text: "对推！老子这边也有大哥！", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 2 } },
-                    { text: "……慌了，随便放了张矿工", score: { dedication: 0, social: 1, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "理性平推，每一滴圣水都不能浪费", score: { dedication: 1, social: 0, competitive: 2, exploration: 1, action: 2 } },
+                    { text: "把八张卡轮流上场，正好练练操作", score: { dedication: 2, social: 0, competitive: 0, exploration: 3, action: 1 } },
+                    { text: "开始研究他的卡组配置，记一下备用", score: { dedication: 3, social: 0, competitive: 1, exploration: 3, action: 0 } }
                 ]
             },
             {
                 dimension: "exploration",
-                text: "【皇室战争专属】对手挂机了，你？",
+                text: "圣水2-1换算，你掌握了吗？",
                 options: [
-                    { text: "理性推塔，不浪费一滴圣水", score: { dedication: 1, social: 0, competitive: 2, exploration: 1, action: 2 } },
-                    { text: "全部卡牌轮流上场，帮我练操作", score: { dedication: 2, social: 0, competitive: 0, exploration: 3, action: 1 } },
-                    { text: "开始研究对面的卡组，记下来下次用", score: { dedication: 3, social: 0, competitive: 1, exploration: 3, action: 0 } }
+                    { text: "当然！双圣水节奏我打得如火纯青", score: { dedication: 2, social: 0, competitive: 3, exploration: 1, action: 3 } },
+                    { text: "理论上懂，实战中经常一团糟", score: { dedication: 1, social: 0, competitive: 1, exploration: 2, action: 1 } },
+                    { text: "圣水数值？我就知道要等满再出牌", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "competitive",
-                text: "【皇室战争专属】圣水2-1打法你掌握了吗？",
+                text: "最后十秒，你的王塔只剩一滴血，但对面王塔也残血，你？",
                 options: [
-                    { text: "当然！双圣水我打得溜得飞起", score: { dedication: 2, social: 0, competitive: 3, exploration: 1, action: 3 } },
-                    { text: "知道原理，但执行经常一团糟", score: { dedication: 1, social: 0, competitive: 1, exploration: 2, action: 1 } },
-                    { text: "圣水？我就知道有圣水这个东西", score: { dedication: 0, social: 2, competitive: 0, exploration: 0, action: 0 } }
+                    { text: "全押上！就算同归于尽也是我赢！", score: { dedication: 1, social: 0, competitive: 3, exploration: 0, action: 3 } },
+                    { text: "稳住防守，等加时赛冷静打", score: { dedication: 2, social: 0, competitive: 2, exploration: 2, action: 2 } },
+                    { text: "手抖了，点了两张牌然后全死了", score: { dedication: 0, social: 1, competitive: 1, exploration: 0, action: 0 } }
                 ]
             },
             {
                 dimension: "social",
-                text: "【皇室战争专属】部落战来了，你的出战率是？",
+                text: "你看到部落里有人一直没捐赠卡，你？",
                 options: [
-                    { text: "满勤！缺阵的都该踢出去", score: { dedication: 3, social: 3, competitive: 1, exploration: 0, action: 0 } },
-                    { text: "能出就出，但不会逼自己", score: { dedication: 1, social: 1, competitive: 0, exploration: 1, action: 0 } },
-                    { text: "我在部落里主要是负责潜水的", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } }
+                    { text: "直接踢了，部落不养闲人", score: { dedication: 1, social: 3, competitive: 2, exploration: 0, action: 0 } },
+                    { text: "私信提醒一下，给个机会", score: { dedication: 1, social: 2, competitive: 0, exploration: 1, action: 0 } },
+                    { text: "无所谓，我自己也经常忘记捐", score: { dedication: 0, social: 0, competitive: 0, exploration: 2, action: 0 } }
                 ]
             }
         ];
@@ -2031,18 +2029,18 @@
                 games: ["皇室战争"]
             },
             "COLLECTOR": {
-                type: "骷髅之王",
+                type: "骷髅帝王",
                 name: "Skeleton King · 收集狂魔",
                 quote: "再差一个就满了。（已经说了两百次了）",
-                desc: "你是皇室战场上的骷髅之王——灵魂不集满绝不出手，每一次觉醒都是仪式感拉满的表演。别人嫌你费，你知道这叫积累。那一瞬间满魂爆发，隔壁打牌的人都会回头看。\n\n不过你的手机相册里现在有多少张截图了？你自己数一下。什么成就啊、彩蛋啊、隐藏结局啊，全存着，但你上次回看是什么时候？",
+                desc: "你是皇室战场上的骷髅帝王——灵魂不集满绝不出手，每一次觉醒都是仪式感拉满的表演。别人嫌你费，你知道这叫积累。那一瞬间满魂爆发，隔壁打牌的人都会回头看。\n\n不过你的手机相册里现在有多少张截图了？你自己数一下。什么成就啊、彩蛋啊、隐藏卡组啊，全存着，但你上次回看是什么时候？",
                 dimensions: { dedication: "肝帝在线", social: "安静收集", competitive: "自娱自乐", exploration: "收集强迫症", action: "完美主义" },
                 games: ["皇室战争"]
             },
             "CHILL_GAMER": {
-                type: "冰法师",
+                type: "寒冰法师",
                 name: "Ice Wizard · 佛系宗师",
                 quote: "慢下来，不是因为我弱，是因为你太急了。",
-                desc: "你是皇室战场上传说级别的冰法师——3费，永远在给全场降温。对面一顿猛如虎的操作，被你一个冰冻法术：停。你不是不行，你只是懒得表演。\n\n但说实话，你在皇室战争里的赢法叫\"佛系收割\"，在现实里叫\"我不是不想努力，我只是在等时机\"。时机什么时候到？不知道，再等等。",
+                desc: "你是皇室战场上传说级别的寒冰法师——3费，永远在给全场降温。对面一顿猛如虎的操作，被你一个冰冻法术：停。你不是不行，你只是懒得表演。\n\n但说实话，你在皇室战争里的赢法叫\"佛系收割\"，在现实里叫\"我不是不想努力，我只是在等时机\"。时机什么时候到？不知道，再等等。",
                 dimensions: { dedication: "佛系本佛", social: "安静美男子", competitive: "无欲无求", exploration: "随缘探索", action: "养老专家" },
                 games: ["皇室战争"]
             },
@@ -2079,10 +2077,10 @@
                 games: ["皇室战争"]
             },
             "GUILD_LEADER": {
-                type: "武僧",
+                type: "盖世武僧",
                 name: "Monk · 部落顶梁柱",
                 quote: "护盾给你们挡，锅我来背，赢了你们的功劳——这就叫做领导力。",
-                desc: "你是皇室战场上的武僧——冠军卡，护盾一开格挡全场，带着兄弟们冲锋，关键时刻就是你顶上去的那个人。部落战满勤、捐卡最积极、群里最活跃，大家都说\"有你在就安心\"。\n\n但你自己知道，每次带着一群人打完战争，你已经累成狗了。然后第二天打开游戏，群里又有人@你\"会长，今晚打一把？\"……你叹了口气，然后回复\"好\"。",
+                desc: "你是皇室战场上的盖世武僧——英雄卡，护盾一开格挡全场，带着兄弟们冲锋，关键时刻就是你顶上去的那个人。部落战满勤、捐赠最积极、群里最活跃，大家都说\"有你在就安心\"。\n\n但你自己知道，每次带着一群人打完部落战，你已经累成狗了。然后第二天打开游戏，群里又有人@你\"首领，今晚打一把？\"……你叹了口气，然后回复\"好\"。",
                 dimensions: { dedication: "全勤标兵", social: "一呼百应", competitive: "团队荣耀", exploration: "统筹规划", action: "社交指挥官" },
                 games: ["皇室战争"]
             },
@@ -2090,15 +2088,15 @@
                 type: "野猪骑士",
                 name: "Hog Rider · 永动机",
                 quote: "HOGA RIDAAAA！圣水出了就冲，想那么多干嘛？",
-                desc: "你就是皇室战争里最经典的那张脸——野猪骑士，号角一吹，直奔王者之塔，不管对面放了什么，先冲再说。节奏快、反应快、送死也快。\n\n你打游戏就像发消息，永远不打草稿直接发出去。策略？先冲了再想。节奏？冲就是节奏。对面刚放下塔卫兵，你的野猪已经撞上去了。胜率不算高，但每局都很爽，这就够了。",
+                desc: "你就是皇室战争里最经典的那张脸——野猪骑士，号角一吹，直奔对方建筑，不管对面放了什么，先冲再说。节奏快、反应快、送死也快。\n\n你打游戏就像发消息，永远不打草稿直接发出去。策略？先冲了再想。节奏？冲就是节奏。对面刚放下塔卫兵，你的野猪已经撞上去了。胜率不算高，但每局都很爽，这就够了。",
                 dimensions: { dedication: "碎片大师", social: "随时组队", competitive: "轻度竞技", exploration: "快速体验", action: "手机宗师" },
                 games: ["皇室战争"]
             },
             "STORY_LOVER": {
-                type: "矿工",
+                type: "掘地矿工",
                 name: "Miner · 地下哲学家",
                 quote: "别急，我从地下走，慢慢来，这叫做有深度。",
-                desc: "你是皇室战场上的矿工——从地下钻出来，悄无声息地出现在对面最意想不到的地方，每一次选点都经过深思熟虑。对手永远猜不到你从哪里冒出来，因为你连自己都不一定知道。\n\n你是那种会看完NPC每一条对话、研究完卡组每一张卡克制关系的人。别人三分钟打完的对局，你能从录像里看出十层意义。你不慢，你只是比所有人都深——虽然有时候深到让队友等得着急。",
+                desc: "你是皇室战场上的掘地矿工——从地下钻出来，悄无声息地出现在对面最意想不到的地方，每一次选点都经过深思熟虑。对手永远猜不到你从哪里冒出来，因为你连自己都不一定知道。\n\n你是那种会研究完卡组每一张卡克制关系的人。别人三分钟打完的对局，你能从录像里看出十层意义。你不慢，你只是比所有人都深——虽然有时候深到让对手等得着急。",
                 dimensions: { dedication: "沉浸体验", social: "安静欣赏", competitive: "无视胜负", exploration: "叙事鉴赏家", action: "剧情优先" },
                 games: ["皇室战争"]
             },
